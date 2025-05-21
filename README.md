@@ -15,9 +15,6 @@ We present FlexSelect, a flexible and efficient token selection method that leve
 - [ ] Visualization code release of FlexSelect with LLaVA-Vide, Qwen2.5VL, InternVL2.5.
 - [ ] Release the trained token selector.
 
-## License
-
-FlexSelect is released under the [`CC BY-NC-SA 4.0 license`](https://creativecommons.org/licenses/by-nc-sa/4.0/).
 
 ## Performance
 
@@ -27,10 +24,10 @@ We conduct experiments on three video LLMs (LLaVA-video, Qwen2.5VL, InternVL2.5)
 
 | Model | Size | VideoMME (Long) | VideoMME (Overall) | MLVU (M-Avg) | LongVB (Val) | LVBench (Test) |
 |-------|------|-----------------|--------------------|--------------|--------------|----------------|
-| **Proprietary Models** | | | | | | |
+| **Proprietary Models** ||||||
 | GPT-4o   | - | 65.3 | 71.9 | 64.6 | 66.7 | 34.7 |
 | Gemini-1.5-Pro   | - | **67.4** | **75.0** | - | 64.0 | 33.1 |
-| **Open-Source VideoLLMs** | | | | | | |
+| **Open-Source VideoLLMs** ||||||
 | mPLUG-Owl3   | 7B | 50.1 | 59.3 | 63.7 | 52.1 | 43.5 |
 | Qwen2-VL   | 7B | 53.8 | 63.3 | 66.9 | 55.6 | 42.4 |
 | NVILA   | 8B | 54.8 | 64.2 | 70.1 | 57.7 | - |
@@ -140,6 +137,10 @@ We will release our trained token selector model.
 ## Acknowledgement
 
 This repository is built upon [`LMMS-EVAL`](https://github.com/EvolvingLMMs-Lab/lmms-eval), [`LLaVA-Video`](https://github.com/LLaVA-VL/LLaVA-NeXT), [`InternVL2.5`](https://github.com/OpenGVLab/InternVL), and [`Qwen2.5VL`](https://github.com/QwenLM/Qwen2.5-VL). Thanks for those well-organized codebases.
+
+## License
+
+FlexSelect is released under the [`CC BY-NC-SA 4.0 license`](https://creativecommons.org/licenses/by-nc-sa/4.0/).
 
 ## Citation
 
