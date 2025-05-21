@@ -9,6 +9,29 @@ The official repository for paper "FlexSelect: Flexible Token Selection for Effi
 
 We present FlexSelect, a flexible and efficient token selection method that leverages cross-modal attention scores in VideoLLMs to identify query-relevant visual tokens. Our approach combines: (1) training-free attention-based token ranking, and (2) a lightweight selector for fast filtering.
 
+## Visualization Result
+We identify the reference layer in VideoLLM where cross-modal attention scores best reflect the text-visual semantical relevance.
+
+### Recall@K result
+
+```bash
+python3 flexselect/visualization/LLaVA-NeXT/needle_llava.py
+python3 flexselect/visualization/QwenVL/needle_qwen2_5vl.py
+python3 flexselect/visualization/InternVL2/needle_internvl2_5.py
+```
+
+### Attention Scores Heatmap
+
+```bash 
+python3 flexselect/visualization/LLaVA-NeXT/draw_heatmap_llava.py 
+python3 flexselect/visualization/InternVL2/draw_heatmap_internvl.py
+```
+### PCA Visualization
+
+```bash
+python3 /mnt/sh/mmvision/home/yunzhuzhang/flexselect/visualization/LLaVA-NeXT/pca_llava.py
+```
+
 ## Todo:
 - [x] Evaluation Code release of FlexSelect with LLaVA-Vide, Qwen2.5VL, InternVL2.5.
 - [x] Training Code release of FlexSelect with LLaVA-Vide, Qwen2.5VL, InternVL2.5.
