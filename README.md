@@ -36,25 +36,46 @@ The pretrained model can be found in their respective repositories: [`LLaVA-Vide
 
 FlexSelect works in two modes: training-free mode and lightweight mode.  We evaluate them using LMMS-Eval. We follow the environment installation guideline of [`LMMS-EVAL`](https://github.com/EvolvingLMMs-Lab/lmms-eval/blob/main/README.md#installation).
 
-run command sh eval/scripts/training_free/eval_llavavideo.sh to reproduce our result.
+run command 
+```bash 
+sh eval/scripts/training_free/eval_llavavideo.sh 
+sh eval/scripts/training_free/eval_internvl2_5.sh 
+sh eval/scripts/training_free/eval_qwenvl2_5.sh
+```
+to reproduce our result.
 
 Here are explanations of variants in our eval scripts:
 
-- "use_token_selector": set to "true" to enabale flexselect, otherwise the evaluation will run without token selection.
+| Parameter                 | Type       | Options / Notes                                                                 | Default  |
+|---------------------------|------------|---------------------------------------------------------------------------------|----------|
+| **`use_token_selector`**  | `boolean`  | - `true`: Enable FlexSelect token selection<br>- `false`: Disable (standard eval) | `false`  |
+| **`token_selector_path`** | `string`   | - `"self"`: Training-free mode<br>- `"path/to/model"`: Lightweight mode (需替换为实际路径) | `"self"` |
+| **`token_selector_layer`**| `integer`  | 参考层编号（仅 **Training-free 模式** 生效）                                   | `-1`     |
+| **`drop_func_name`**      | `string`   | 语义相关性分数计算方式：<br>- `"token_selection"`: 取头维+文本维平均值<br>- `"token_selection_argmax"`: 取头维+文本维 argmax | `"token_selection"` |
+| **`tkn_budget`**          | `integer`  | 最大选择 token 数量（预算控制）                                                | `32`     |
 
-- "token_selector_path": set to "self" to let flexselect run in training-free mode; set to a trained token selector model path to let flexselect run in lightweight mode.
-
-- "token_selector_layer": the reference layer, only  effective in training free mode.
-
-- "drop_func_name": we provide two ways to derive semantic relevance scores from cross-modal scores. "token_selection" take the average of the head dimension and text dimension, and "token_selection" take the argmax of the head dimension and text dimension.
-
-- "tkn_budget": the max selected tokens
 
 Here are explanations of some commandline choice:
 
-- "model": the name of evaluation models. "llava_vid" for LLaVA-Video-7B evaluation; "internvl2" for InternVL2.5; "qwen2_5_vl" for Qwen2.5VL.
+### 1. **Model Selection (`--model`)**
+Specify the evaluation model with the following options:  
 
-- "tasks": evaluation task. "videomme" for "Video-MME" task, "mlvu_dev" for "MLVU" task, "lvbench" for "LVBench", "longvideobench_val_v" for "LongVideoBench" task.  It should be noted that the official testing code for the InternVL series models uses caption, so the corresponding LongVideoBench task name in Videomme is longvideobench_val_i.
+| Value          | Model Evaluated               |
+|----------------|-------------------------------|
+| `llava_vid`    | LLaVA-Video-7B                |
+| `internvl2`    | InternVL2.5                   |
+| `qwen2_5_vl`   | Qwen2.5VL                     |
+
+### 2. **Task Selection (`--tasks`)**
+| Value                  | Task Name          | Notes                              |
+|------------------------|--------------------|------------------------------------|
+| `videomme`             | Video-MME          | Standard video evaluation          |
+| `mlvu_dev`             | MLVU               | Multi-language video understanding |
+| `lvbench`              | LVBench            | Short-video benchmark              |
+| `longvideobench_val_v` | LongVideoBench     | Default variant (e.g., for LLaVA)  |
+| `longvideobench_val_i` | LongVideoBench     | **InternVL series only** (uses caption) |
+
+
 
 
 # token selector training
@@ -67,11 +88,16 @@ We follow the environment installation guideline of corresponding project to con
 - Qwen2.5VL: https://github.com/QwenLM/Qwen2.5-VL/blob/main/qwen-vl-finetune/README.md
 - InternVL2.5: https://internvl.readthedocs.io/en/latest/internvl2.5/finetune.html
 
-You can follow these command lines to reprocuce the training:
+```bash
+# Step 1: Train LLaVA-Video selector
+cd train/LLaVA-Video && sh scripts/train_selector.sh
 
-1. cd train/LLaVA-Video && sh scripts/train_selector.sh
-2. cd train/Qwen2.5-VL/qwen-vl-finetune && sh scripts/sft_7b.sh
-3. cd train/InternVL/internvl_chat && sh shell/internvl2.5/2nd_finetune/internvl2_5_8b_dynamic_res_2nd_finetune_full.sh
+# Step 2: Finetune Qwen2.5-VL
+cd train/Qwen2.5-VL/qwen-vl-finetune && sh scripts/sft_7b.sh
+
+# Step 3: Finetune InternVL (dynamic resolution)
+cd train/InternVL/internvl_chat && sh shell/internvl2.5/2nd_finetune/internvl2_5_8b_dynamic_res_2nd_finetune_full.sh
+```
 
 The training data can be found at:...
 We will release our trained token selector model.
