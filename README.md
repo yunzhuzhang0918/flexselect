@@ -40,16 +40,21 @@ run command sh eval/scripts/training_free/eval_llavavideo.sh to reproduce our re
 
 Here are explanations of variants in our eval scripts:
 
-"use_token_selector": set to "true" to enabale flexselect, otherwise the evaluation will run without token selection.
-"token_selector_path": set to "self" to let flexselect run in training-free mode; set to a trained token selector model path to let flexselect run in lightweight mode.
-"token_selector_layer": the reference layer, only  effective in training free mode.
-"drop_func_name": we provide two ways to derive semantic relevance scores from cross-modal scores. "token_selection" take the average of the head dimension and text dimension, and "token_selection" take the argmax of the head dimension and text dimension.
-"tkn_budget": the max selected tokens
+- "use_token_selector": set to "true" to enabale flexselect, otherwise the evaluation will run without token selection.
+
+- "token_selector_path": set to "self" to let flexselect run in training-free mode; set to a trained token selector model path to let flexselect run in lightweight mode.
+
+- "token_selector_layer": the reference layer, only  effective in training free mode.
+
+- "drop_func_name": we provide two ways to derive semantic relevance scores from cross-modal scores. "token_selection" take the average of the head dimension and text dimension, and "token_selection" take the argmax of the head dimension and text dimension.
+
+- "tkn_budget": the max selected tokens
 
 Here are explanations of some commandline choice:
 
-"model": the name of evaluation models. "llava_vid" for LLaVA-Video-7B evaluation; "internvl2" for InternVL2.5; "qwen2_5_vl" for Qwen2.5VL.
-"tasks": evaluation task. "videomme" for "Video-MME" task, "mlvu_dev" for "MLVU" task, "lvbench" for "LVBench", "longvideobench_val_v" for "LongVideoBench" task.  It should be noted that the official testing code for the InternVL series models uses caption, so the corresponding LongVideoBench task name in Videomme is longvideobench_val_i.
+- "model": the name of evaluation models. "llava_vid" for LLaVA-Video-7B evaluation; "internvl2" for InternVL2.5; "qwen2_5_vl" for Qwen2.5VL.
+
+- "tasks": evaluation task. "videomme" for "Video-MME" task, "mlvu_dev" for "MLVU" task, "lvbench" for "LVBench", "longvideobench_val_v" for "LongVideoBench" task.  It should be noted that the official testing code for the InternVL series models uses caption, so the corresponding LongVideoBench task name in Videomme is longvideobench_val_i.
 
 
 # token selector training
@@ -58,9 +63,9 @@ FlexSelect trains 0.5B token selector for LLaVA-Video-7B, Qwen2.5VL-7B and Inter
 
 We follow the environment installation guideline of corresponding project to construct training environment:
 
-LLaVA-Video: https://github.com/LLaVA-VL/LLaVA-NeXT?tab=readme-ov-file#2-install-the-inference-package
-Qwen2.5VL: https://github.com/QwenLM/Qwen2.5-VL/blob/main/qwen-vl-finetune/README.md
-InternVL2.5: https://internvl.readthedocs.io/en/latest/internvl2.5/finetune.html
+- LLaVA-Video: https://github.com/LLaVA-VL/LLaVA-NeXT?tab=readme-ov-file#2-install-the-inference-package
+- Qwen2.5VL: https://github.com/QwenLM/Qwen2.5-VL/blob/main/qwen-vl-finetune/README.md
+- InternVL2.5: https://internvl.readthedocs.io/en/latest/internvl2.5/finetune.html
 
 You can follow these command lines to reprocuce the training:
 
