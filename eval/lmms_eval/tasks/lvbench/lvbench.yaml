@@ -1,4 +1,4 @@
-dataset_path: /mnt/sh/mmvision/home/yunzhuzhang/huggingface/LVBench
+dataset_path: LVBench
 dataset_kwargs:
   token: True
   cache_dir: LVBench

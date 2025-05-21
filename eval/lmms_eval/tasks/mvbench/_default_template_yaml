@@ -1,4 +1,4 @@
-dataset_path: /mnt/csp/mmvision/home/yunzhuzhang/huggingface/mvbench_video
+dataset_path: mvbench_video
 dataset_kwargs:
   token: True
   cache_dir: mvbench_video

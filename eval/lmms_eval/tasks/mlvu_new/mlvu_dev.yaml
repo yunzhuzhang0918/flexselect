@@ -1,4 +1,4 @@
-dataset_path: /mnt/csp/mmvision/home/yunzhuzhang/huggingface/MLVU_dev
+dataset_path: MLVU_dev
 dataset_kwargs:
   token: True
   cache_dir: mlvu_dev

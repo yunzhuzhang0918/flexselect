@@ -1,4 +1,4 @@
-dataset_path: /mnt/csp/mmvision/home/yunzhuzhang/huggingface/Video-MME
+dataset_path: Video-MME
 dataset_kwargs:
   token: True
   cache_dir: videomme

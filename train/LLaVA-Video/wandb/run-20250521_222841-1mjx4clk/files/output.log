@@ -1,0 +1,18 @@
+
+  0%|          | 0/8348 [00:00<?, ?it/s]/data/workspace/miniconda3/envs/lmms_eval/lib/python3.10/site-packages/torch/utils/checkpoint.py:92: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
+  warnings.warn(
+/data/workspace/miniconda3/envs/lmms_eval/lib/python3.10/site-packages/torch/_dynamo/eval_frame.py:600: UserWarning: torch.utils.checkpoint: the use_reentrant parameter should be passed explicitly. In version 2.4 we will raise an exception if use_reentrant is not passed. use_reentrant=False is recommended, but if you need to preserve the current default behavior, you can pass use_reentrant=True. Refer to docs for more details on the differences between the two variants.
+  return fn(*args, **kwargs)
+/data/workspace/miniconda3/envs/lmms_eval/lib/python3.10/site-packages/torch/utils/checkpoint.py:295: FutureWarning: `torch.cpu.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cpu', args...)` instead.
+  with torch.enable_grad(), device_autocast_ctx, torch.cpu.amp.autocast(**ctx.cpu_autocast_kwargs):  # type: ignore[attr-defined]
+  0%|          | 1/8348 [00:21<49:30:56, 21.36s/it]
+{'loss': 0.005, 'grad_norm': 0.013240530155599117, 'learning_rate': 3.984063745019921e-08, 'epoch': 0.0}
+
+  0%|          | 2/8348 [00:25<25:43:08, 11.09s/it]
+
+
+  0%|          | 4/8348 [00:35<16:51:54,  7.28s/it]
+
+  0%|          | 5/8348 [00:39<14:01:45,  6.05s/it]
+
+  0%|          | 6/8348 [00:43<12:34:48,  5.43s/it]

@@ -32,7 +32,7 @@ torchrun \
   --nproc_per_node=${GPUS} \
   --master_port=${MASTER_PORT} \
   internvl/train/internvl_chat_finetune.py \
-  --model_name_or_path "/mnt/csp/mmvision/home/yunzhuzhang/huggingface/OpenGVLab/InternVL2_5-8B" \
+  --model_name_or_path "OpenGVLab/InternVL2_5-8B" \
   --conv_style "internvl2_5" \
   --use_fast_tokenizer False \
   --output_dir ${OUTPUT_DIR} \
@@ -70,7 +70,6 @@ torchrun \
   --ps_version 'v2' \
   --deepspeed "zero_stage1_config.json" \
   --token_selector_type "qwen2" \
-  --token_selector_path "/mnt/csp/mmvision/home/yunzhuzhang/huggingface/OpenGVLab/InternVL2_5-1B" \
+  --token_selector_path "OpenGVLab/InternVL2_5-1B" \
   --report_to "wandb" \
   2>&1 | tee -a "${OUTPUT_DIR}/training_log.txt"
-#--token_selector_pth "/mnt/csp/mmvision/home/yunzhuzhang/huggingface/OpenGVLab/internvl2_5_token_selector_1_8B/token_selector_weights.pth" \

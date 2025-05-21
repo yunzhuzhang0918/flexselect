@@ -1,8 +1,9 @@
-dataset_path: /mnt/csp/mmvision/home/yunzhu/huggingface/videomme_150_sample/
+dataset_path: Video-MME # your videomme path
 dataset_kwargs:
   token: True
   cache_dir: videomme
   video: True
+    #create_link: True
   # From_YouTube: True
 task: videomme
 test_split: test

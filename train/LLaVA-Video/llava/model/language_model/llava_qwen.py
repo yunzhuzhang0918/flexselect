@@ -131,7 +131,8 @@ class LlavaQwenForCausalLM(Qwen2ForCausalLM, LlavaMetaForCausalLM):
             
         
         # loss = spearmanr(target=text_guide_score_teacher, pred=text_guide_score).float()
-        loss = ((text_guide_score_teacher - text_guide_score) ** 2).sum().float()
+        # loss = ((text_guide_score_teacher - text_guide_score) ** 2).sum().float()
+        loss = torch.abs(text_guide_score_teacher - text_guide_score).sum().float()
         return CausalLMOutputWithPast(
             loss=loss,
             logits=None,

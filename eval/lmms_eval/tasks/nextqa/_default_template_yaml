@@ -1,4 +1,4 @@
-dataset_path: /mnt/csp/mmvision/data/videollm/benchmarks/nextqa/MC
+dataset_path: nextqa/MC
 dataset_kwargs:
   token: True
   video: True

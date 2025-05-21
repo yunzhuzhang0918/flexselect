@@ -22,8 +22,6 @@ export WANDB_PROJECT=llava_video_token_selector
 #scl enable gcc-toolset-13  bash 
 IMAGE_FOLDER="/mnt/sh/mmvision/data/video/public/lmms-lab/LLaVA-Video-178K/data"
 VIDEO_FOLDER="/mnt/sh/mmvision/data/video/public/lmms-lab/LLaVA-Video-178K/data"
-# VIDEO_FOLDER="/mnt/sh/mmvision/home/tyewang/projects/runs/videomm/academic/collect_for_videomme/video"
-# IMAGE_FOLDER="/mnt/sh/mmvision/home/tyewang/projects/runs/videomm/academic/collect_for_videomme/video"
 DATA_YAML="/mnt/sh/mmvision/data/video/public/lmms-lab/output_rnd05.yaml" # e.g exp.yaml
 ARNOLD_WORKER_GPU=8 
 ARNOLD_WORKER_NUM=1  
@@ -44,7 +42,7 @@ LLM_VERSION_CLEAN="${LLM_VERSION//\//_}"
 VISION_MODEL_VERSION="google/siglip-so400m-patch14-384"
 VISION_MODEL_VERSION_CLEAN="${VISION_MODEL_VERSION//\//_}"
 
-BASE_RUN_NAME="llava_max_frames_64_patchsize_729_all_19_qwen_token_selector_5_percent_mixed_up_l2_loss"
+BASE_RUN_NAME="llava_max_frames_64_patchsize_729_all_19_qwen_token_selector_5_percent_mixed_up_l1_loss"
 
 echo "BASE_RUN_NAME: ${BASE_RUN_NAME}"
 
@@ -77,7 +75,7 @@ ACCELERATE_CPU_AFFINITY=1 torchrun --nproc_per_node="${ARNOLD_WORKER_GPU}" --nno
     --mm_patch_merge_type spatial_unpad \
     --bf16 True \
     --run_name $MID_RUN_NAME \
-    --output_dir ./work_dirs/$MID_RUN_NAME \
+    --output_dir /mnt/sh/mmvision/home/yunzhuzhang/csp/$MID_RUN_NAME \
     --num_train_epochs 1 \
     --per_device_train_batch_size 1 \
     --gradient_accumulation_steps 1 \

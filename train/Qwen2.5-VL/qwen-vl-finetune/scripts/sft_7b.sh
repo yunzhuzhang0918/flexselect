@@ -1,9 +1,9 @@
 #!/bin/bash
 
 # Distributed training configuration
-export http_proxy=http://9.131.113.25:11113
-export https_proxy=http://9.131.113.25:11113
-export all_proxy=http://9.131.113.25:11113
+export http_proxy=
+export https_proxy=
+export all_proxy=
 MASTER_ADDR=${MASTER_ADDR:-"127.0.0.1"}
 MASTER_PORT=${MASTER_PORT:-$(shuf -i 20001-29999 -n 1)}
 NNODES=${WORLD_SIZE:-1}
@@ -11,13 +11,12 @@ NPROC_PER_NODE=1
 
 
 FRAME_SELECT_LAYER=19
-DROP_FUNC=token_selection_pe
+DROP_FUNC=token_selection
 # DeepSpeed configuration
 deepspeed=./scripts/zero3.json
 # scl enable gcc-toolset-13  bash
 # Model configuration
-llm=/mnt/sh/mmvision/home/yunzhuzhang/huggingface/Qwen/Qwen2.5-VL-7B-Instruct  # Using HuggingFace model ID
-# llm=/mnt/sh/mmvision/home/yunzhuzhang/Qwen2.5-VL/qwen-vl-finetune/output/qwen2_5vl_small_token_selector_spearnmanloss_epoch3
+llm=Qwen/Qwen2.5-VL-7B-Instruct  # Using HuggingFace model ID
 # Training hyperparameters
 lr=1e-5
 batch_size=1
@@ -33,7 +32,7 @@ datasets=vprit_long
 run_name="qwen2_5vl_small_token_selector_dbg"
 output_dir=./output/${run_name}
 export WANDB_PROJECT="qwen2_5vl_token_selector"
-export WANDB_API_KEY=1f3a190546e4ad0be14534e5155dce501d07950b
+export WANDB_API_KEY=YOUR_WANDB_KEY
 # Training arguments
 args="
     --deepspeed ${deepspeed} \
@@ -71,7 +70,7 @@ args="
     --run_name ${run_name} \
     --token_selector_layer 19 \
     --drop_func_name token_selection \
-    --token_selector_path "/mnt/sh/mmvision/home/yunzhuzhang/huggingface/Qwen/Qwen2-0.5B-Instruct" \
+    --token_selector_path "Qwen/Qwen2-0.5B-Instruct" \
     --report_to wandb"
 
 #--save_steps 1000 \

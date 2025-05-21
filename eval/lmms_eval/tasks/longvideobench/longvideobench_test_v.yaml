@@ -1,4 +1,4 @@
-dataset_path: /mnt/csp/mmvision/data/videollm/benchmarks/
+dataset_path: 
 dataset_kwargs:
   token: True
   cache_dir: longvideobench
