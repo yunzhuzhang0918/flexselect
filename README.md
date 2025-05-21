@@ -24,10 +24,10 @@ We conduct experiments on three video LLMs (LLaVA-video, Qwen2.5VL, InternVL2.5)
 
 | Model | Size | VideoMME (Long) | VideoMME (Overall) | MLVU (M-Avg) | LongVB (Val) | LVBench (Test) |
 |-------|------|-----------------|--------------------|--------------|--------------|----------------|
-| **Proprietary Models** ||||||
+**Proprietary Models**
 | GPT-4o   | - | 65.3 | 71.9 | 64.6 | 66.7 | 34.7 |
 | Gemini-1.5-Pro   | - | **67.4** | **75.0** | - | 64.0 | 33.1 |
-| **Open-Source VideoLLMs** ||||||
+**Open-Source VideoLLMs**
 | mPLUG-Owl3   | 7B | 50.1 | 59.3 | 63.7 | 52.1 | 43.5 |
 | Qwen2-VL   | 7B | 53.8 | 63.3 | 66.9 | 55.6 | 42.4 |
 | NVILA   | 8B | 54.8 | 64.2 | 70.1 | 57.7 | - |
