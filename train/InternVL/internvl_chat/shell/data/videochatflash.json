@@ -1,0 +1,10 @@
+{
+    "videochatflash": {
+      "root": "/mnt/sh/mmvision/home/yunzhuzhang/huggingface/OpenGVLab/VideoChat-Flash-Training-Data/longvid_subset/videos",
+      "annotation": "/mnt/sh/mmvision/home/yunzhuzhang/InternVL/internvl_chat/videochatflash.jsonl",
+      "data_augment": false,
+      "max_dynamic_patch": 12,
+      "repeat_time": 1,
+      "length": 102025
+    }
+  }

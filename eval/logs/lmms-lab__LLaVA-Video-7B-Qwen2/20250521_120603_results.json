@@ -1,0 +1,125 @@
+{
+  "results": {
+    "videomme_all": {
+      "alias": "videomme_all",
+      "videomme_percetion_score,none": 66.85185185185185,
+      "videomme_percetion_score_stderr,none": "N/A"
+    }
+  },
+  "frame_selector_layer": "None",
+  "drop_func": "None",
+  "group_subtasks": {
+    "videomme_all": []
+  },
+  "configs": {
+    "videomme_all": {
+      "task": "videomme_all",
+      "dataset_path": "/mnt/csp/mmvision/home/yunzhuzhang/huggingface/Video-MME",
+      "dataset_kwargs": {
+        "token": true
+      },
+      "test_split": "test",
+      "full_docs": false,
+      "process_results_use_image": false,
+      "doc_to_visual": "<function videomme_doc_to_visual at 0x7f046fbaadd0>",
+      "doc_to_text": "<function videomme_doc_to_text at 0x7f046fbab7f0>",
+      "doc_to_target": "answer",
+      "process_results": "<function videomme_process_results at 0x7f046fb3c430>",
+      "description": "",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "num_fewshot": 0,
+      "metric_list": [
+        {
+          "metric": "videomme_percetion_score",
+          "aggregation": "<function videomme_aggregate_results at 0x7f046fb3cee0>",
+          "higher_is_better": true
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "max_new_tokens": 1,
+        "temperature": 0.0,
+        "top_p": 1.0,
+        "num_beams": 1,
+        "do_sample": false,
+        "until": [
+          "\n\n"
+        ]
+      },
+      "repeats": 1,
+      "should_decontaminate": false,
+      "metadata": [
+        {
+          "version": 0.0
+        }
+      ],
+      "lmms_eval_specific_kwargs": {
+        "default": {
+          "pre_prompt": "",
+          "post_prompt": "\nAnswer with the option's letter from the given choices directly."
+        },
+        "gpt4v": {
+          "pre_prompt": "",
+          "post_prompt": "Answer the question with A, B, C, or D."
+        },
+        "llava_vid": {
+          "pre_prompt": "",
+          "post_prompt": "The best answer is:"
+        },
+        "xcomposer2_4khd": {
+          "pre_prompt": "[UNUSED_TOKEN_146]user\n",
+          "post_prompt": " Answer this question with A, B, C, or D.[UNUSED_TOKEN_145]\n[UNUSED_TOKEN_146]assistant\n"
+        }
+      }
+    }
+  },
+  "versions": {
+    "videomme_all": "Yaml"
+  },
+  "n-shot": {
+    "videomme_all": 0
+  },
+  "higher_is_better": {
+    "videomme_all": {
+      "videomme_percetion_score": true
+    }
+  },
+  "n-samples": {
+    "videomme_all": {
+      "original": 2700,
+      "effective": 2700
+    }
+  },
+  "config": {
+    "model": "llava_vid",
+    "model_args": "pretrained=/mnt/sh/mmvision/home/yunzhuzhang/huggingface/lmms-lab/LLaVA-Video-7B-Qwen2,conv_template=qwen_1_5,video_decode_backend=decord,max_frames_num=512,mm_spatial_pool_mode=bilinear,use_token_selector=true,token_selector_path=/mnt/sh/mmvision/home/yunzhuzhang/csp/work_dirs/llava_max_frames_64_patchsize_729_all_19_qwen_token_selector_5_percent_mixed_up_l2_loss,token_selector_layer=19,tkn_budget=6720,drop_func_name=token_selection",
+    "batch_size": "1",
+    "batch_sizes": [],
+    "device": null,
+    "use_cache": null,
+    "limit": null,
+    "bootstrap_iters": 100000,
+    "gen_kwargs": "",
+    "random_seed": 0,
+    "numpy_seed": 1234,
+    "torch_seed": 1234,
+    "fewshot_seed": 1234
+  },
+  "git_hash": "debacb7",
+  "date": "20250521_120603",
+  "task_hashes": {
+    "videomme_all": "806efaf4ce463eae4fb5b960c59d0b9f26971934c320673d51a52b000e958f36"
+  },
+  "model_source": "llava_vid",
+  "model_name": "/mnt/sh/mmvision/home/yunzhuzhang/huggingface/lmms-lab/LLaVA-Video-7B-Qwen2",
+  "model_name_sanitized": "lmms-lab__LLaVA-Video-7B-Qwen2",
+  "system_instruction": null,
+  "system_instruction_sha": null,
+  "fewshot_as_multiturn": false,
+  "chat_template": null,
+  "chat_template_sha": null,
+  "start_time": 1092388.5568527,
+  "end_time": 1104562.164455932,
+  "total_evaluation_time_seconds": "12173.607603232143"
+}

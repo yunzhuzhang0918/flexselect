@@ -1,0 +1,126 @@
+
+  0%|          | 0/66789 [00:00<?, ?it/s]/data/workspace/miniconda3/envs/lmms_eval/lib/python3.10/site-packages/torch/utils/checkpoint.py:92: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
+  warnings.warn(
+/data/workspace/miniconda3/envs/lmms_eval/lib/python3.10/site-packages/torch/_dynamo/eval_frame.py:600: UserWarning: torch.utils.checkpoint: the use_reentrant parameter should be passed explicitly. In version 2.4 we will raise an exception if use_reentrant is not passed. use_reentrant=False is recommended, but if you need to preserve the current default behavior, you can pass use_reentrant=True. Refer to docs for more details on the differences between the two variants.
+  return fn(*args, **kwargs)
+/data/workspace/miniconda3/envs/lmms_eval/lib/python3.10/site-packages/torch/utils/checkpoint.py:295: FutureWarning: `torch.cpu.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cpu', args...)` instead.
+  with torch.enable_grad(), device_autocast_ctx, torch.cpu.amp.autocast(**ctx.cpu_autocast_kwargs):  # type: ignore[attr-defined]
+  0%|          | 1/66789 [00:07<134:42:07,  7.26s/it]
+{'loss': 1.3828, 'grad_norm': 22.747764587402344, 'learning_rate': 4.99001996007984e-09, 'epoch': 0.0}
+
+  0%|          | 2/66789 [00:11<98:53:58,  5.33s/it]
+
+  0%|          | 3/66789 [00:15<87:04:58,  4.69s/it]
+
+  0%|          | 4/66789 [00:19<81:24:54,  4.39s/it]
+
+  0%|          | 5/66789 [00:22<78:06:57,  4.21s/it]
+
+  0%|          | 6/66789 [00:26<76:08:06,  4.10s/it]
+
+  0%|          | 7/66789 [00:30<74:47:46,  4.03s/it]
+
+  0%|          | 8/66789 [00:34<73:57:21,  3.99s/it]
+
+
+  0%|          | 10/66789 [00:42<73:07:40,  3.94s/it]
+
+  0%|          | 11/66789 [00:46<72:58:26,  3.93s/it]
+
+  0%|          | 12/66789 [00:50<72:52:24,  3.93s/it]
+{'loss': 1.9062, 'grad_norm': 33.10546875, 'learning_rate': 5.98802395209581e-08, 'epoch': 0.0}
+
+  0%|          | 13/66789 [00:54<75:33:21,  4.07s/it]
+
+  0%|          | 14/66789 [00:58<76:29:17,  4.12s/it]
+
+  0%|          | 15/66789 [01:02<75:15:08,  4.06s/it]
+
+  0%|          | 16/66789 [01:06<74:21:34,  4.01s/it]
+
+  0%|          | 17/66789 [01:10<73:47:50,  3.98s/it]
+
+  0%|          | 18/66789 [01:14<74:16:22,  4.00s/it]
+
+
+  0%|          | 20/66789 [01:22<73:27:36,  3.96s/it]
+
+  0%|          | 21/66789 [01:26<73:15:32,  3.95s/it]
+
+  0%|          | 22/66789 [01:30<73:05:00,  3.94s/it]
+
+  0%|          | 23/66789 [01:34<72:52:22,  3.93s/it]
+
+  0%|          | 24/66789 [01:38<72:43:51,  3.92s/it]
+
+  0%|          | 25/66789 [01:42<72:35:11,  3.91s/it]
+
+  0%|          | 26/66789 [01:46<73:21:47,  3.96s/it]
+
+  0%|          | 27/66789 [01:50<73:17:21,  3.95s/it]
+
+  0%|          | 28/66789 [01:54<73:12:31,  3.95s/it]
+  0%|          | 28/66789 [01:54<73:12:31,  3.95s/it]Traceback (most recent call last):
+  File "/mnt/csp/mmvision/home/yunzhuzhang/flexselect/train/LLaVA-Video/train_mem.py", line 5, in <module>
+    train()
+  File "/mnt/csp/mmvision/home/yunzhuzhang/flexselect/train/LLaVA-Video/llava/train/train.py", line 1749, in train
+    trainer.train()
+  File "/data/workspace/miniconda3/envs/lmms_eval/lib/python3.10/site-packages/transformers/trainer.py", line 2052, in train
+    return inner_training_loop(
+  File "/data/workspace/miniconda3/envs/lmms_eval/lib/python3.10/site-packages/transformers/trainer.py", line 2388, in _inner_training_loop
+    tr_loss_step = self.training_step(model, inputs)
+  File "/data/workspace/miniconda3/envs/lmms_eval/lib/python3.10/site-packages/transformers/trainer.py", line 3518, in training_step
+    self.accelerator.backward(loss, **kwargs)
+  File "/data/workspace/miniconda3/envs/lmms_eval/lib/python3.10/site-packages/accelerate/accelerator.py", line 2188, in backward
+    self.deepspeed_engine_wrapped.backward(loss, **kwargs)
+  File "/data/workspace/miniconda3/envs/lmms_eval/lib/python3.10/site-packages/accelerate/utils/deepspeed.py", line 166, in backward
+    self.engine.backward(loss, **kwargs)
+  File "/data/workspace/miniconda3/envs/lmms_eval/lib/python3.10/site-packages/deepspeed/utils/nvtx.py", line 20, in wrapped_fn
+    ret_val = func(*args, **kwargs)
+  File "/data/workspace/miniconda3/envs/lmms_eval/lib/python3.10/site-packages/deepspeed/runtime/engine.py", line 2187, in backward
+    self._do_optimizer_backward(loss, retain_graph)
+  File "/data/workspace/miniconda3/envs/lmms_eval/lib/python3.10/site-packages/deepspeed/runtime/engine.py", line 2133, in _do_optimizer_backward
+    self.optimizer.backward(loss, retain_graph=retain_graph)
+  File "/data/workspace/miniconda3/envs/lmms_eval/lib/python3.10/site-packages/deepspeed/runtime/zero/stage_1_and_2.py", line 2089, in backward
+    self.loss_scaler.backward(loss.float(), retain_graph=retain_graph)
+  File "/data/workspace/miniconda3/envs/lmms_eval/lib/python3.10/site-packages/deepspeed/runtime/fp16/loss_scaler.py", line 63, in backward
+    scaled_loss.backward(retain_graph=retain_graph)
+  File "/data/workspace/miniconda3/envs/lmms_eval/lib/python3.10/site-packages/torch/_tensor.py", line 521, in backward
+    torch.autograd.backward(
+  File "/data/workspace/miniconda3/envs/lmms_eval/lib/python3.10/site-packages/torch/autograd/__init__.py", line 289, in backward
+    _engine_run_backward(
+  File "/data/workspace/miniconda3/envs/lmms_eval/lib/python3.10/site-packages/torch/autograd/graph.py", line 769, in _engine_run_backward
+    return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+KeyboardInterrupt
+[rank0]: Traceback (most recent call last):
+[rank0]:   File "/mnt/csp/mmvision/home/yunzhuzhang/flexselect/train/LLaVA-Video/train_mem.py", line 5, in <module>
+[rank0]:     train()
+[rank0]:   File "/mnt/csp/mmvision/home/yunzhuzhang/flexselect/train/LLaVA-Video/llava/train/train.py", line 1749, in train
+[rank0]:     trainer.train()
+[rank0]:   File "/data/workspace/miniconda3/envs/lmms_eval/lib/python3.10/site-packages/transformers/trainer.py", line 2052, in train
+[rank0]:     return inner_training_loop(
+[rank0]:   File "/data/workspace/miniconda3/envs/lmms_eval/lib/python3.10/site-packages/transformers/trainer.py", line 2388, in _inner_training_loop
+[rank0]:     tr_loss_step = self.training_step(model, inputs)
+[rank0]:   File "/data/workspace/miniconda3/envs/lmms_eval/lib/python3.10/site-packages/transformers/trainer.py", line 3518, in training_step
+[rank0]:     self.accelerator.backward(loss, **kwargs)
+[rank0]:   File "/data/workspace/miniconda3/envs/lmms_eval/lib/python3.10/site-packages/accelerate/accelerator.py", line 2188, in backward
+[rank0]:     self.deepspeed_engine_wrapped.backward(loss, **kwargs)
+[rank0]:   File "/data/workspace/miniconda3/envs/lmms_eval/lib/python3.10/site-packages/accelerate/utils/deepspeed.py", line 166, in backward
+[rank0]:     self.engine.backward(loss, **kwargs)
+[rank0]:   File "/data/workspace/miniconda3/envs/lmms_eval/lib/python3.10/site-packages/deepspeed/utils/nvtx.py", line 20, in wrapped_fn
+[rank0]:     ret_val = func(*args, **kwargs)
+[rank0]:   File "/data/workspace/miniconda3/envs/lmms_eval/lib/python3.10/site-packages/deepspeed/runtime/engine.py", line 2187, in backward
+[rank0]:     self._do_optimizer_backward(loss, retain_graph)
+[rank0]:   File "/data/workspace/miniconda3/envs/lmms_eval/lib/python3.10/site-packages/deepspeed/runtime/engine.py", line 2133, in _do_optimizer_backward
+[rank0]:     self.optimizer.backward(loss, retain_graph=retain_graph)
+[rank0]:   File "/data/workspace/miniconda3/envs/lmms_eval/lib/python3.10/site-packages/deepspeed/runtime/zero/stage_1_and_2.py", line 2089, in backward
+[rank0]:     self.loss_scaler.backward(loss.float(), retain_graph=retain_graph)
+[rank0]:   File "/data/workspace/miniconda3/envs/lmms_eval/lib/python3.10/site-packages/deepspeed/runtime/fp16/loss_scaler.py", line 63, in backward
+[rank0]:     scaled_loss.backward(retain_graph=retain_graph)
+[rank0]:   File "/data/workspace/miniconda3/envs/lmms_eval/lib/python3.10/site-packages/torch/_tensor.py", line 521, in backward
+[rank0]:     torch.autograd.backward(
+[rank0]:   File "/data/workspace/miniconda3/envs/lmms_eval/lib/python3.10/site-packages/torch/autograd/__init__.py", line 289, in backward
+[rank0]:     _engine_run_backward(
+[rank0]:   File "/data/workspace/miniconda3/envs/lmms_eval/lib/python3.10/site-packages/torch/autograd/graph.py", line 769, in _engine_run_backward
+[rank0]:     return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+[rank0]: KeyboardInterrupt

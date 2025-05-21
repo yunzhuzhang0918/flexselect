@@ -1,0 +1,10 @@
+{
+    "llava_video_178k": {
+      "root": "/mnt/sh/mmvision/data/video/public/lmms-lab/LLaVA-Video-178K/data",
+      "annotation": "/mnt/sh/mmvision/home/yunzhuzhang/InternVL/internvl_chat/llava_video_178k.jsonl",
+      "data_augment": false,
+      "max_dynamic_patch": 12,
+      "repeat_time": 1,
+      "length": 102025
+    }
+  }

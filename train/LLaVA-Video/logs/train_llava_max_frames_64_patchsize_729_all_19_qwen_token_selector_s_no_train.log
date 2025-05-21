@@ -1,0 +1,189 @@
+/data/workspace/miniconda3/envs/lmms_eval/lib/python3.10/site-packages/transformers/training_args.py:1545: FutureWarning: `evaluation_strategy` is deprecated and will be removed in version 4.46 of 🤗 Transformers. Use `eval_strategy` instead
+  warnings.warn(
+Sliding Window Attention is enabled but not implemented for `sdpa`; unexpected results may be encountered.
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:00<00:01,  1.67it/s]Loading checkpoint shards:  50%|█████     | 2/4 [00:01<00:01,  1.54it/s]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:02<00:00,  1.01it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:03<00:00,  1.34it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:03<00:00,  1.31it/s]
+You are using a model of type llava to instantiate a model of type qwen2. This is not supported for all configurations of models and can yield errors.
+/data/workspace/miniconda3/envs/lmms_eval/lib/python3.10/site-packages/transformers/deepspeed.py:24: FutureWarning: transformers.deepspeed module is deprecated and will be removed in a future version. Please import deepspeed modules directly from transformers.integrations
+  warnings.warn(
+Detected kernel version 5.4.119, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+Using /root/.cache/torch_extensions/py310_cu124 as PyTorch extensions root...
+Emitting ninja build file /root/.cache/torch_extensions/py310_cu124/cpu_adam/build.ninja...
+Building extension module cpu_adam...
+Allowing ninja to set a default number of workers... (overridable by setting the environment variable MAX_JOBS=N)
+Loading extension module cpu_adam...
+wandb: Currently logged in as: 986198920. Use `wandb login --relogin` to force relogin
+wandb: Tracking run with wandb version 0.17.8
+wandb: Run data is saved locally in /mnt/csp/mmvision/home/yunzhuzhang/flexselect/train/LLaVA-Video/wandb/run-20250520_205931-p3x9iog4
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run llava_max_frames_64_patchsize_729_all_19_qwen_token_selector_s_no_train
+wandb: ⭐️ View project at https://wandb.ai/986198920/llava_video_token_selector
+wandb: 🚀 View run at https://wandb.ai/986198920/llava_video_token_selector/runs/p3x9iog4
+  0%|          | 0/66789 [00:00<?, ?it/s]/data/workspace/miniconda3/envs/lmms_eval/lib/python3.10/site-packages/torch/utils/checkpoint.py:92: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
+  warnings.warn(
+[h264 @ 0xc3cb6500] mmco: unref short failure
+[h264 @ 0xc3cb6500] mmco: unref short failure
+/data/workspace/miniconda3/envs/lmms_eval/lib/python3.10/site-packages/torch/_dynamo/eval_frame.py:600: UserWarning: torch.utils.checkpoint: the use_reentrant parameter should be passed explicitly. In version 2.4 we will raise an exception if use_reentrant is not passed. use_reentrant=False is recommended, but if you need to preserve the current default behavior, you can pass use_reentrant=True. Refer to docs for more details on the differences between the two variants.
+  return fn(*args, **kwargs)
+/data/workspace/miniconda3/envs/lmms_eval/lib/python3.10/site-packages/torch/utils/checkpoint.py:295: FutureWarning: `torch.cpu.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cpu', args...)` instead.
+  with torch.enable_grad(), device_autocast_ctx, torch.cpu.amp.autocast(**ctx.cpu_autocast_kwargs):  # type: ignore[attr-defined]
+[h264 @ 0xc3cb6500] mmco: unref short failure
+[h264 @ 0xc3cb6500] mmco: unref short failure
+  0%|          | 1/66789 [00:08<157:13:54,  8.48s/it]                                                       0%|          | 1/66789 [00:08<157:13:54,  8.48s/it]  0%|          | 2/66789 [00:11<101:33:05,  5.47s/it]                                                       0%|          | 2/66789 [00:11<101:33:05,  5.47s/it]  0%|          | 3/66789 [00:15<83:20:31,  4.49s/it]                                                       0%|          | 3/66789 [00:15<83:20:31,  4.49s/it][h264 @ 0xcc507200] mmco: unref short failure
+  0%|          | 4/66789 [00:18<74:55:41,  4.04s/it]                                                      0%|          | 4/66789 [00:18<74:55:41,  4.04s/it]  0%|          | 5/66789 [00:21<69:58:18,  3.77s/it]                                                      0%|          | 5/66789 [00:21<69:58:18,  3.77s/it][h264 @ 0xcae1d480] mmco: unref short failure
+[h264 @ 0xcae1d480] mmco: unref short failure
+  0%|          | 6/66789 [00:25<70:41:12,  3.81s/it]                                                      0%|          | 6/66789 [00:25<70:41:12,  3.81s/it][h264 @ 0xcae1d480] mmco: unref short failure
+[h264 @ 0xcae1d480] mmco: unref short failure
+  0%|          | 7/66789 [00:29<69:18:45,  3.74s/it]                                                      0%|          | 7/66789 [00:29<69:18:45,  3.74s/it][h264 @ 0xcae1d480] mmco: unref short failure
+[h264 @ 0xcae1d480] mmco: unref short failure
+[h264 @ 0xcae1d480] mmco: unref short failure
+W0520 21:00:05.308000 139639581607744 torch/distributed/elastic/agent/server/api.py:688] Received Signals.SIGINT death signal, shutting down workers
+W0520 21:00:05.309000 139639581607744 torch/distributed/elastic/multiprocessing/api.py:858] Sending process 22254 closing signal SIGINT
+Traceback (most recent call last):
+  File "/mnt/csp/mmvision/home/yunzhuzhang/flexselect/train/LLaVA-Video/train_mem.py", line 5, in <module>
+    train()
+  File "/mnt/csp/mmvision/home/yunzhuzhang/flexselect/train/LLaVA-Video/llava/train/train.py", line 1749, in train
+    trainer.train()
+  File "/data/workspace/miniconda3/envs/lmms_eval/lib/python3.10/site-packages/transformers/trainer.py", line 2052, in train
+    return inner_training_loop(
+  File "/data/workspace/miniconda3/envs/lmms_eval/lib/python3.10/site-packages/transformers/trainer.py", line 2388, in _inner_training_loop
+    tr_loss_step = self.training_step(model, inputs)
+  File "/data/workspace/miniconda3/envs/lmms_eval/lib/python3.10/site-packages/transformers/trainer.py", line 3485, in training_step
+    loss = self.compute_loss(model, inputs)
+  File "/data/workspace/miniconda3/envs/lmms_eval/lib/python3.10/site-packages/transformers/trainer.py", line 3532, in compute_loss
+    outputs = model(**inputs)
+  File "/data/workspace/miniconda3/envs/lmms_eval/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1553, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/data/workspace/miniconda3/envs/lmms_eval/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1562, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/data/workspace/miniconda3/envs/lmms_eval/lib/python3.10/site-packages/deepspeed/utils/nvtx.py", line 20, in wrapped_fn
+    ret_val = func(*args, **kwargs)
+  File "/data/workspace/miniconda3/envs/lmms_eval/lib/python3.10/site-packages/deepspeed/runtime/engine.py", line 2030, in forward
+    loss = self.module(*inputs, **kwargs)
+  File "/data/workspace/miniconda3/envs/lmms_eval/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1553, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/data/workspace/miniconda3/envs/lmms_eval/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1603, in _call_impl
+    result = forward_call(*args, **kwargs)
+  File "/mnt/csp/mmvision/home/yunzhuzhang/flexselect/train/LLaVA-Video/llava/model/language_model/llava_qwen.py", line 126, in forward
+    (input_ids, position_ids, attention_mask, past_key_values, inputs_embeds, labels, vision_embedding_pos, input_embeds_for_token_selector) = self.prepare_inputs_labels_for_multimodal(input_ids, position_ids, attention_mask, past_key_values, labels, images, modalities, image_sizes)
+  File "/mnt/csp/mmvision/home/yunzhuzhang/flexselect/train/LLaVA-Video/llava/model/llava_arch.py", line 638, in prepare_inputs_labels_for_multimodal
+    _, position_ids, attention_mask, past_key_values, new_input_embeds, new_labels, vision_embedding_pos = self.prepare_inputs_labels_for_multimodal_old(input_ids, position_ids, attention_mask, past_key_values, labels, images, modalities, image_sizes, for_token_selector=False)
+  File "/mnt/csp/mmvision/home/yunzhuzhang/flexselect/train/LLaVA-Video/llava/model/llava_arch.py", line 507, in prepare_inputs_labels_for_multimodal_old
+    input_ids = [cur_input_ids[cur_attention_mask] for cur_input_ids, cur_attention_mask in zip(input_ids, attention_mask)]
+  File "/mnt/csp/mmvision/home/yunzhuzhang/flexselect/train/LLaVA-Video/llava/model/llava_arch.py", line 507, in <listcomp>
+    input_ids = [cur_input_ids[cur_attention_mask] for cur_input_ids, cur_attention_mask in zip(input_ids, attention_mask)]
+KeyboardInterrupt
+[rank0]: Traceback (most recent call last):
+[rank0]:   File "/mnt/csp/mmvision/home/yunzhuzhang/flexselect/train/LLaVA-Video/train_mem.py", line 5, in <module>
+[rank0]:     train()
+[rank0]:   File "/mnt/csp/mmvision/home/yunzhuzhang/flexselect/train/LLaVA-Video/llava/train/train.py", line 1749, in train
+[rank0]:     trainer.train()
+[rank0]:   File "/data/workspace/miniconda3/envs/lmms_eval/lib/python3.10/site-packages/transformers/trainer.py", line 2052, in train
+[rank0]:     return inner_training_loop(
+[rank0]:   File "/data/workspace/miniconda3/envs/lmms_eval/lib/python3.10/site-packages/transformers/trainer.py", line 2388, in _inner_training_loop
+[rank0]:     tr_loss_step = self.training_step(model, inputs)
+[rank0]:   File "/data/workspace/miniconda3/envs/lmms_eval/lib/python3.10/site-packages/transformers/trainer.py", line 3485, in training_step
+[rank0]:     loss = self.compute_loss(model, inputs)
+[rank0]:   File "/data/workspace/miniconda3/envs/lmms_eval/lib/python3.10/site-packages/transformers/trainer.py", line 3532, in compute_loss
+[rank0]:     outputs = model(**inputs)
+[rank0]:   File "/data/workspace/miniconda3/envs/lmms_eval/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1553, in _wrapped_call_impl
+[rank0]:     return self._call_impl(*args, **kwargs)
+[rank0]:   File "/data/workspace/miniconda3/envs/lmms_eval/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1562, in _call_impl
+[rank0]:     return forward_call(*args, **kwargs)
+[rank0]:   File "/data/workspace/miniconda3/envs/lmms_eval/lib/python3.10/site-packages/deepspeed/utils/nvtx.py", line 20, in wrapped_fn
+[rank0]:     ret_val = func(*args, **kwargs)
+[rank0]:   File "/data/workspace/miniconda3/envs/lmms_eval/lib/python3.10/site-packages/deepspeed/runtime/engine.py", line 2030, in forward
+[rank0]:     loss = self.module(*inputs, **kwargs)
+[rank0]:   File "/data/workspace/miniconda3/envs/lmms_eval/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1553, in _wrapped_call_impl
+[rank0]:     return self._call_impl(*args, **kwargs)
+[rank0]:   File "/data/workspace/miniconda3/envs/lmms_eval/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1603, in _call_impl
+[rank0]:     result = forward_call(*args, **kwargs)
+[rank0]:   File "/mnt/csp/mmvision/home/yunzhuzhang/flexselect/train/LLaVA-Video/llava/model/language_model/llava_qwen.py", line 126, in forward
+[rank0]:     (input_ids, position_ids, attention_mask, past_key_values, inputs_embeds, labels, vision_embedding_pos, input_embeds_for_token_selector) = self.prepare_inputs_labels_for_multimodal(input_ids, position_ids, attention_mask, past_key_values, labels, images, modalities, image_sizes)
+[rank0]:   File "/mnt/csp/mmvision/home/yunzhuzhang/flexselect/train/LLaVA-Video/llava/model/llava_arch.py", line 638, in prepare_inputs_labels_for_multimodal
+[rank0]:     _, position_ids, attention_mask, past_key_values, new_input_embeds, new_labels, vision_embedding_pos = self.prepare_inputs_labels_for_multimodal_old(input_ids, position_ids, attention_mask, past_key_values, labels, images, modalities, image_sizes, for_token_selector=False)
+[rank0]:   File "/mnt/csp/mmvision/home/yunzhuzhang/flexselect/train/LLaVA-Video/llava/model/llava_arch.py", line 507, in prepare_inputs_labels_for_multimodal_old
+[rank0]:     input_ids = [cur_input_ids[cur_attention_mask] for cur_input_ids, cur_attention_mask in zip(input_ids, attention_mask)]
+[rank0]:   File "/mnt/csp/mmvision/home/yunzhuzhang/flexselect/train/LLaVA-Video/llava/model/llava_arch.py", line 507, in <listcomp>
+[rank0]:     input_ids = [cur_input_ids[cur_attention_mask] for cur_input_ids, cur_attention_mask in zip(input_ids, attention_mask)]
+[rank0]: KeyboardInterrupt
+W0520 21:00:06.280000 139639581607744 torch/distributed/elastic/multiprocessing/api.py:858] Sending process 22254 closing signal SIGTERM
+Traceback (most recent call last):
+  File "/data/workspace/miniconda3/envs/lmms_eval/lib/python3.10/site-packages/torch/distributed/elastic/agent/server/api.py", line 680, in run
+    result = self._invoke_run(role)
+  File "/data/workspace/miniconda3/envs/lmms_eval/lib/python3.10/site-packages/torch/distributed/elastic/agent/server/api.py", line 835, in _invoke_run
+    time.sleep(monitor_interval)
+  File "/data/workspace/miniconda3/envs/lmms_eval/lib/python3.10/site-packages/torch/distributed/elastic/multiprocessing/api.py", line 79, in _terminate_process_handler
+    raise SignalException(f"Process {os.getpid()} got signal: {sigval}", sigval=sigval)
+torch.distributed.elastic.multiprocessing.api.SignalException: Process 22189 got signal: 2
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/data/workspace/miniconda3/envs/lmms_eval/lib/python3.10/site-packages/torch/distributed/elastic/agent/server/api.py", line 689, in run
+    self._shutdown(e.sigval)
+  File "/data/workspace/miniconda3/envs/lmms_eval/lib/python3.10/site-packages/torch/distributed/elastic/agent/server/local_elastic_agent.py", line 347, in _shutdown
+    self._pcontext.close(death_sig)
+  File "/data/workspace/miniconda3/envs/lmms_eval/lib/python3.10/site-packages/torch/distributed/elastic/multiprocessing/api.py", line 544, in close
+    self._close(death_sig=death_sig, timeout=timeout)
+  File "/data/workspace/miniconda3/envs/lmms_eval/lib/python3.10/site-packages/torch/distributed/elastic/multiprocessing/api.py", line 868, in _close
+    handler.proc.wait(time_to_wait)
+  File "/data/workspace/miniconda3/envs/lmms_eval/lib/python3.10/subprocess.py", line 1209, in wait
+    return self._wait(timeout=timeout)
+  File "/data/workspace/miniconda3/envs/lmms_eval/lib/python3.10/subprocess.py", line 1953, in _wait
+    time.sleep(delay)
+  File "/data/workspace/miniconda3/envs/lmms_eval/lib/python3.10/site-packages/torch/distributed/elastic/multiprocessing/api.py", line 79, in _terminate_process_handler
+    raise SignalException(f"Process {os.getpid()} got signal: {sigval}", sigval=sigval)
+torch.distributed.elastic.multiprocessing.api.SignalException: Process 22189 got signal: 2
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/data/workspace/miniconda3/envs/lmms_eval/bin/torchrun", line 8, in <module>
+    sys.exit(main())
+  File "/data/workspace/miniconda3/envs/lmms_eval/lib/python3.10/site-packages/torch/distributed/elastic/multiprocessing/errors/__init__.py", line 348, in wrapper
+    return f(*args, **kwargs)
+  File "/data/workspace/miniconda3/envs/lmms_eval/lib/python3.10/site-packages/torch/distributed/run.py", line 901, in main
+    run(args)
+  File "/data/workspace/miniconda3/envs/lmms_eval/lib/python3.10/site-packages/torch/distributed/run.py", line 892, in run
+    elastic_launch(
+  File "/data/workspace/miniconda3/envs/lmms_eval/lib/python3.10/site-packages/torch/distributed/launcher/api.py", line 133, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+  File "/data/workspace/miniconda3/envs/lmms_eval/lib/python3.10/site-packages/torch/distributed/launcher/api.py", line 255, in launch_agent
+    result = agent.run()
+  File "/data/workspace/miniconda3/envs/lmms_eval/lib/python3.10/site-packages/torch/distributed/elastic/metrics/api.py", line 124, in wrapper
+    result = f(*args, **kwargs)
+  File "/data/workspace/miniconda3/envs/lmms_eval/lib/python3.10/site-packages/torch/distributed/elastic/agent/server/api.py", line 694, in run
+    self._shutdown()
+  File "/data/workspace/miniconda3/envs/lmms_eval/lib/python3.10/site-packages/torch/distributed/elastic/agent/server/local_elastic_agent.py", line 347, in _shutdown
+    self._pcontext.close(death_sig)
+  File "/data/workspace/miniconda3/envs/lmms_eval/lib/python3.10/site-packages/torch/distributed/elastic/multiprocessing/api.py", line 544, in close
+    self._close(death_sig=death_sig, timeout=timeout)
+  File "/data/workspace/miniconda3/envs/lmms_eval/lib/python3.10/site-packages/torch/distributed/elastic/multiprocessing/api.py", line 868, in _close
+    handler.proc.wait(time_to_wait)
+  File "/data/workspace/miniconda3/envs/lmms_eval/lib/python3.10/subprocess.py", line 1209, in wait
+    return self._wait(timeout=timeout)
+  File "/data/workspace/miniconda3/envs/lmms_eval/lib/python3.10/subprocess.py", line 1953, in _wait
+    time.sleep(delay)
+  File "/data/workspace/miniconda3/envs/lmms_eval/lib/python3.10/site-packages/torch/distributed/elastic/multiprocessing/api.py", line 79, in _terminate_process_handler
+    raise SignalException(f"Process {os.getpid()} got signal: {sigval}", sigval=sigval)
+torch.distributed.elastic.multiprocessing.api.SignalException: Process 22189 got signal: 2
+wandb: - 0.019 MB of 0.019 MB uploadedwandb: \ 0.022 MB of 0.053 MB uploadedwandb: | 0.053 MB of 0.053 MB uploadedwandb: 
+wandb: Run history:
+wandb:         train/epoch ▁▂▃▄▆▇█
+wandb:   train/global_step ▁▂▃▅▆▇█
+wandb:     train/grad_norm █▂▄▁█▂▅
+wandb: train/learning_rate ▁▂▃▅▆▇█
+wandb:          train/loss ▅▃▄▃▁█▄
+wandb: 
+wandb: Run summary:
+wandb:         train/epoch 0.0001
+wandb:   train/global_step 7
+wandb:     train/grad_norm 13.88052
+wandb: train/learning_rate 0.0
+wandb:          train/loss 0.7266
+wandb: 
+wandb: 🚀 View run llava_max_frames_64_patchsize_729_all_19_qwen_token_selector_s_no_train at: https://wandb.ai/986198920/llava_video_token_selector/runs/p3x9iog4
+wandb: ⭐️ View project at: https://wandb.ai/986198920/llava_video_token_selector
+wandb: Synced 6 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20250520_205931-p3x9iog4/logs
+wandb: WARNING The new W&B backend becomes opt-out in version 0.18.0; try it out with `wandb.require("core")`! See https://wandb.me/wandb-core for more information.
