@@ -5,7 +5,7 @@ The official repository for paper "FlexSelect: Flexible Token Selection for Effi
 [`Webpage`]() ｜ [`Paper`]()
 
 ## Introduction
-![Framework](assets/arch.pdf)
+![Framework](assets/arch.png)
 
 We present FlexSelect, a flexible and efficient token selection method that leverages cross-modal attention scores in VideoLLMs to identify query-relevant visual tokens. Our approach combines: (1) training-free attention-based token ranking, and (2) a lightweight selector for fast filtering.
 
