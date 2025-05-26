@@ -18,7 +18,7 @@ unset __conda_setup
 gcc -v
 export http_proxy=http://9.131.113.25:11113
 export https_proxy=http://9.131.113.25:11113
-export WANDB_PROJECT=llava_video_token_selector
+
 #scl enable gcc-toolset-13  bash 
 IMAGE_FOLDER="/mnt/sh/mmvision/data/video/public/lmms-lab/LLaVA-Video-178K/data"
 VIDEO_FOLDER="/mnt/sh/mmvision/data/video/public/lmms-lab/LLaVA-Video-178K/data"
@@ -31,6 +31,7 @@ port_in_cmd=9527
 
 alias python=python3
 ############### Show Envs ####################
+export WANDB_PROJECT=llava_video_token_selector
 export WANDB_API_KEY=1f3a190546e4ad0be14534e5155dce501d07950b
 export TOKENIZERS_PARALLELISM=1
 nvidia-smi
