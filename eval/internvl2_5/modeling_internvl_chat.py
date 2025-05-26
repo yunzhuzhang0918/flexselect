@@ -91,27 +91,34 @@ class InternVLChatModel(PreTrainedModel):
 
         self.conv_template = get_conv_template(self.template)
         self.system_message = self.conv_template.system_message
+        
     
     def convert_ids_from_internvl_to_qwen(self, ids):
         return self.tokenizer_selector.encode(self.tokenizer_teacher.decode(ids, spaces_between_special_tokens=False))
     def load_token_selector(self, config, tokenizer_teacher):
+
+        self.img_start_id = 92544
+        self.img_end_id = 92545
+        self.img_context_token_id = 92546
+        self.img_start_id_for_selector = 92544
+        self.img_end_id_for_selector = 92545
+        self.img_context_token_id_for_selector = 92546
         if config.token_selector_path == "self":
-            self.token_selector_self = InternLM2ForSelector_FromSelf(config=config, bigger_model=self, drop_func_name=config.drop_func_name).to(self.dtype)
+            self.token_selector = InternLM2ForSelector_FromSelf(config=config, bigger_model=self, drop_func_name=config.drop_func_name).to(self.dtype)
         else:
             if config.token_selector_type == 'internlm':
                 # token_selector_config._attn_implementation = "flash_attention_2"
-                self.token_selector = InternLM2ForSelector_EXTERNAL.from_pretrained(config.token_selector_path, drop_func_name=config.drop_func_name).to(self.dtype)
-                
-            elif config.token_selector_type == 'qwen':
-                self.token_selector = Qwen2ForSelector_EXTERNAL.from_pretrained(config.token_selector_path, drop_func_name=config.drop_func_name).to(self.dtype)
+                self.token_selector = InternLM2ForSelector_EXTERNAL.from_pretrained(config.token_selector_path, drop_func_name=config.drop_func_name, vit_hidden_size=config.vision_config.hidden_size).to(self.dtype)
+            elif config.token_selector_type == 'qwen2':
+               
+                self.token_selector = Qwen2ForSelector_EXTERNAL.from_pretrained(config.token_selector_path, drop_func_name=config.drop_func_name, vit_hidden_size=config.vision_config.hidden_size).to(self.dtype)
                 self.tokenizer_teacher = tokenizer_teacher
                 self.tokenizer_selector = AutoTokenizer.from_pretrained(config.token_selector_path, trust_remote_code=True)
-                self.img_start_id = 92544
-                self.img_end_id = 92545
-                self.img_context_token_id = 92546
+                
                 self.img_context_token_id_for_selector = self.convert_ids_from_internvl_to_qwen(self.img_context_token_id)[0]
                 self.img_start_id_for_selector = self.convert_ids_from_internvl_to_qwen(self.img_start_id)[0]
                 self.img_end_id_for_selector = self.convert_ids_from_internvl_to_qwen(self.img_end_id)[0]
+            print(f"load token selector from {config.token_selector_path}")
 
     def forward(
             self,
@@ -457,22 +464,26 @@ class InternVLChatModel(PreTrainedModel):
             input_embeds = input_embeds.reshape(B, N, C1)
 
             ### drop vision tokens
-            
+   
             if hasattr(self, "token_selector"):
                 token_selector = self.token_selector
                 if isinstance(token_selector, Qwen2ForSelector_EXTERNAL):
                     input_ids_for_token_selector = torch.tensor(self.convert_ids_from_internvl_to_qwen(input_ids[1:])).to(input_ids.device)
+                    input_embeds_for_token_selector = token_selector.language_model.get_input_embeddings()(input_ids_for_token_selector)
                     selected_for_token_selector = (input_ids_for_token_selector == self.img_context_token_id_for_selector)
                 elif isinstance(token_selector, InternLM2ForSelector_EXTERNAL):
                     input_ids_for_token_selector = input_ids
+                    input_embeds_for_token_selector = token_selector.language_model.get_input_embeddings()(input_ids_for_token_selector)
                     selected_for_token_selector = selected
                 elif isinstance(token_selector, InternLM2ForSelector_FromSelf):
+                    input_ids_for_token_selector = input_ids
                     input_embeds_for_token_selector = input_embeds
+                    selected_for_token_selector = selected
                     
                 start = torch.where(input_ids_for_token_selector == self.img_start_id_for_selector)[0].min().item()
                 end = torch.where(input_ids_for_token_selector == self.img_end_id_for_selector)[0].max().item() + 1
                 vision_embed_pos = [[[start, end - start]]]
-                input_embeds_for_token_selector = token_selector.language_model.get_input_embeddings()(input_ids_for_token_selector)
+                
                 vit_embeds_for_token_selector = token_selector.mlp1(vit_embeds)
                 N2, C2 = input_embeds_for_token_selector.shape[-2:]
                 input_embeds_for_token_selector = input_embeds_for_token_selector.reshape(B * N2, C2)

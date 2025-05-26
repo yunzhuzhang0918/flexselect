@@ -365,17 +365,16 @@ class Qwen2ForSelector_EXTERNAL(Qwen2PreTrainedModel):
     _supports_flex_attn = True
     _supports_attention_backend = True
 
-    def __init__(self, config, drop_func_name):
+    def __init__(self, config, drop_func_name, vit_hidden_size):
         super().__init__(config)
         self.downsample_ratio = config.downsample_ratio
         # Enable Flash Attention if supported, otherwise fall back to eager attention.
 
-       
-        self.language_model = Qwen2ForCausalLM(AutoConfig.for_model(**config.llm_config))
+        
+        self.language_model = Qwen2ForCausalLM(config)
         del self.language_model.lm_head
-        import pdb; pdb.set_trace()
-        vit_hidden_size = config.vision_config["hidden_size"]
-        llm_hidden_size = config.llm_config["hidden_size"]
+        
+        llm_hidden_size = config.hidden_size
 
        
         # drop_func = getattr(InternLM2DecoderLayer_Selector, drop_func_name)
@@ -435,18 +434,18 @@ class InternLM2ForSelector_EXTERNAL(InternLM2PreTrainedModel):
     _supports_flex_attn = True
     _supports_attention_backend = True
 
-    def __init__(self, config, drop_func_name):
+    def __init__(self, config, drop_func_name, vit_hidden_size):
         super().__init__(config)
         self.downsample_ratio = config.downsample_ratio
         # Enable Flash Attention if supported, otherwise fall back to eager attention.
 
         
-        self.language_model = InternLM2ForCausalLM(InternLM2Config(**config.llm_config))
+        self.language_model = InternLM2ForCausalLM(config)
         del self.language_model.output
         
             
-        vit_hidden_size = config.vision_config["hidden_size"]
-        llm_hidden_size = config.llm_config["hidden_size"]
+        
+        llm_hidden_size = config.hidden_size
 
        
         # drop_func = getattr(InternLM2DecoderLayer_Selector, drop_func_name)

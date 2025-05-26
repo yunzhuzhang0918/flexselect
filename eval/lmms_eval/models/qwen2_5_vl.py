@@ -311,7 +311,7 @@ class Qwen2_5_VL(lmms):
                 inputs = inputs.to(self.device)
 
             if "max_new_tokens" not in gen_kwargs:
-                gen_kwargs["max_new_tokens"] = 1
+                gen_kwargs["max_new_tokens"] = 16
             if "temperature" not in gen_kwargs:
                 gen_kwargs["temperature"] = 0
             if "top_p" not in gen_kwargs:
@@ -329,12 +329,13 @@ class Qwen2_5_VL(lmms):
                 temperature=gen_kwargs["temperature"],
                 top_p=gen_kwargs["top_p"],
                 num_beams=gen_kwargs["num_beams"],
-                max_new_tokens=1,
+                max_new_tokens=gen_kwargs["max_new_tokens"],
                 use_cache=self.use_cache,
+                tkn_budget=self.tkn_budget
             )
 
             generated_ids_trimmed = [out_ids[len(in_ids) :] for in_ids, out_ids in zip(inputs.input_ids, cont)]
-            answers = self.processor.batch_decode(generated_ids_trimmed, skip_special_tokens=True, clean_up_tokenization_spaces=False, tkn_budget=self.tkn_budget)
+            answers = self.processor.batch_decode(generated_ids_trimmed, skip_special_tokens=True, clean_up_tokenization_spaces=False)
             for i, ans in enumerate(answers):
                 answers[i] = ans
             print("Answers:", answers)

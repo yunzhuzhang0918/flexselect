@@ -689,13 +689,13 @@ class Qwen2_5_VisionTransformerPretrainedModel(Qwen2_5_VLPreTrainedModel):
         hidden_states_origin = self.merger(hidden_states)
         reverse_indices = torch.argsort(window_index)
         hidden_states_origin = hidden_states_origin[reverse_indices, :]
-        hidden_states_token_selector = None
+        
         if hasattr(self, 'merger_token_selector'):
             hidden_states_token_selector = self.merger_token_selector(hidden_states)
             hidden_states_token_selector = hidden_states_token_selector[reverse_indices, :]
-           
+            return hidden_states_origin, hidden_states_token_selector
 
-        return hidden_states_origin, hidden_states_token_selector
+        return hidden_states_origin
 
 
 class Qwen2_5_VLRotaryEmbedding(nn.Module):
@@ -1673,6 +1673,7 @@ class Qwen2_5_VLForConditionalGeneration(Qwen2_5_VLPreTrainedModel, GenerationMi
         if config.use_token_selector:
             if config.token_selector_path == "self":
                 self.token_selector = Qwen2_5_Token_Selector(config=config, bigger_model=self.model)
+                # self.visual.merger_token_selector = self.visual.merger
             else:
                 self.token_selector = Qwen2_5_Token_Selector_External.from_pretrained(config.token_selector_path).to(device=self.device, dtype=self.dtype)
                 self.visual.merger_token_selector = self.token_selector.merger_token_selector
@@ -1873,7 +1874,7 @@ class Qwen2_5_VLForConditionalGeneration(Qwen2_5_VLPreTrainedModel, GenerationMi
             return position_ids, mrope_position_deltas
 
 
-    def compress_vision_embeddings(self, vision_embedding_pos, inputs_embeds, tokens_per_frame, max_frames_per_group, video_grid_thw, position_ids):
+    def compress_vision_embeddings(self, vision_embedding_pos, inputs_embeds, tokens_per_frame, max_frames_per_group, video_grid_thw, position_ids, tkn_budget):
         """
         压缩长视频序列的视觉token
         参数:
@@ -1908,7 +1909,7 @@ class Qwen2_5_VLForConditionalGeneration(Qwen2_5_VLPreTrainedModel, GenerationMi
         num_frames = total_tokens // tokens_per_frame
         num_groups = math.ceil(num_frames / max_frames_per_group)
        
-        tkn_budget = int(os.getenv("TOKEN_BUDGET", 2880))
+        
         if tkn_budget % tokens_per_frame != 0:
             tkn_budget = math.ceil(tkn_budget / tokens_per_frame) * tokens_per_frame
         print("tokenbudget:", tkn_budget)
@@ -2005,6 +2006,7 @@ class Qwen2_5_VLForConditionalGeneration(Qwen2_5_VLPreTrainedModel, GenerationMi
         rope_deltas: Optional[torch.LongTensor] = None,
         cache_position: Optional[torch.LongTensor] = None,
         second_per_grid_ts: Optional[torch.Tensor] = None,
+        tkn_budget: Optional[int] = None,
     ) -> Union[Tuple, Qwen2_5_VLCausalLMOutputWithPast]:
         r"""
         Args:
@@ -2055,6 +2057,7 @@ class Qwen2_5_VLForConditionalGeneration(Qwen2_5_VLPreTrainedModel, GenerationMi
         start = length = 0
 
         if inputs_embeds is None:
+            
             if hasattr(self, "token_selector"):
                 inputs_embeds = self.model.embed_tokens(input_ids)
                 # if Mode == "EXTERNAL":
@@ -2085,7 +2088,11 @@ class Qwen2_5_VLForConditionalGeneration(Qwen2_5_VLPreTrainedModel, GenerationMi
 
                 if pixel_values_videos is not None:
                     pixel_values_videos = pixel_values_videos.type(self.visual.dtype)
-                    video_embeds, video_embeds_for_token_selector = self.visual(pixel_values_videos, grid_thw=video_grid_thw)
+                    if isinstance(self.token_selector, Qwen2_5_Token_Selector):
+                        video_embeds = self.visual(pixel_values_videos, grid_thw=video_grid_thw)
+                        video_embeds_for_token_selector = video_embeds
+                    elif isinstance(self.token_selector, Qwen2_5_Token_Selector_External):
+                        video_embeds, video_embeds_for_token_selector = self.visual(pixel_values_videos, grid_thw=video_grid_thw)
                     
                     n_video_tokens = (input_ids == self.config.video_token_id).sum().item()
                     n_video_features = video_embeds.shape[0]
@@ -2199,7 +2206,7 @@ class Qwen2_5_VLForConditionalGeneration(Qwen2_5_VLPreTrainedModel, GenerationMi
         t, h, w = video_grid_thw[0][0].item(), video_grid_thw[0][1].item(), video_grid_thw[0][2].item()
         print("input embeds:", inputs_embeds.shape)
         
-        if os.getenv("TOKEN_SELECTOR_MODEL", None):
+        if hasattr(self, "token_selector") and inputs_embeds.shape[1] !=1:
             t, h, w = video_grid_thw[0][0].item(), video_grid_thw[0][1].item(), video_grid_thw[0][2].item()
             token_per_frame = h * w // 4
             
@@ -2213,7 +2220,8 @@ class Qwen2_5_VLForConditionalGeneration(Qwen2_5_VLPreTrainedModel, GenerationMi
                 inputs_embeds=inputs_embeds_for_token_selector,
                 max_frames_per_group=64,
                 video_grid_thw=video_grid_thw,
-                position_ids = position_ids
+                position_ids = position_ids,
+                tkn_budget=tkn_budget
             )
 
             prefix_embeddings = inputs_embeds[:, :start, :]
@@ -2307,6 +2315,7 @@ class Qwen2_5_VLForConditionalGeneration(Qwen2_5_VLPreTrainedModel, GenerationMi
         image_grid_thw=None,
         video_grid_thw=None,
         second_per_grid_ts=None,
+        tkn_budget=None,
         **kwargs,
     ):
         # Overwritten -- in specific circumstances we don't want to forward image inputs to the model
@@ -2371,6 +2380,7 @@ class Qwen2_5_VLForConditionalGeneration(Qwen2_5_VLPreTrainedModel, GenerationMi
                 "video_grid_thw": video_grid_thw,
                 "cache_position": cache_position,
                 "second_per_grid_ts": second_per_grid_ts,
+                "tkn_budget": tkn_budget
             }
         )
         return model_inputs
