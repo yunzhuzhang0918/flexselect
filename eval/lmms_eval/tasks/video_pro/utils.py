@@ -18,7 +18,7 @@ import requests
 hf_home = os.getenv("HF_HOME", "./~/.cache/huggingface")
 base_cache_dir = os.path.expanduser(hf_home)
 
-SUB_CATEGORIES = ["Segment QA", "NIAH QA", "Counting Problem", "Action Recognition", "Attribute Perception", "Object Reasoning", "Temporal Reasoning", "Plot Reasoning", "Entity Recognition", "Key Info Retrieval", "Event Understanding", "Others", "Egocentric Reasoning"]
+SUB_CATEGORIES = ["Segment QA", "NIAH QA", "Counting Problem", "Action Recognition", "Action Reasoning", "Attribute Perception", "Object Reasoning", "Temporal Reasoning", "Plot Reasoning", "Entity Recognition", "Key Info Retrieval", "Event Understanding", "Others", "Egocentric Reasoning", "Object Recognition"]
 
 QA_TYPES = ["Local Perception", "Local Reasoning", "Holistic Perception", "Holistic Reasoning"]
 
@@ -243,7 +243,8 @@ def get_eval_generic(question, target, predicted_answer, max_tokens: int, retrie
         "cid": "guangtwang"
         # "response_format": {"type": "json_object"},
     }
-    
+    import time
+    time.sleep(1)
     for attempt in range(retries):
         try:
             response = requests.post(configs["apiurl"], headers=headers, json=payload, timeout=60)
