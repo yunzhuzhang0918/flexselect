@@ -1,4 +1,4 @@
-dataset_path: /mnt/sh/mmvision/home/yunzhuzhang/huggingface/TIGER-Lab/VideoEval-Pro
+dataset_path: ./data/VideoEval-Pro
 dataset_kwargs:
   token: True
   cache_dir: videopro

@@ -1,4 +1,4 @@
-dataset_path: LVBench
+dataset_path: data/lvbench
 dataset_kwargs:
   token: True
   cache_dir: LVBench

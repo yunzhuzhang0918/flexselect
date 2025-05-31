@@ -565,8 +565,8 @@ class SigLipVisionTower(nn.Module):
         if self.is_loaded:
             rank0_print("{} is already loaded, `load_model` called again, skipping.".format(self.vision_tower_name))
             return
-        self.vision_tower_name = "/mnt/csp/mmvision/home/yunzhuzhang/huggingface/hub/models--google--siglip-so400m-patch14-384/snapshots/9fdffc58afc957d1a03a25b10dba0329ab15c2a3"
-        self.vision_tower = SigLipVisionModel.from_pretrained(self.vision_tower_name, device_map=device_map)
+        config = SigLipVisionConfig.from_pretrained(self.vision_tower_name) 
+        self.vision_tower = SigLipVisionModel(config)
 
         del self.vision_tower.vision_model.encoder.layers[-1:]
         self.vision_tower.vision_model.head = nn.Identity()

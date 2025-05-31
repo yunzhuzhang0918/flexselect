@@ -82,21 +82,37 @@ We conduct experiments on three video LLMs (LLaVA-video, Qwen2.5VL, InternVL2.5)
 
 All four used benchmarks can be downloaded from huggingface website: [`LongVideoBench`](https://huggingface.co/datasets/longvideobench/LongVideoBench), [`VideoMME`](https://huggingface.co/datasets/lmms-lab/Video-MME), [`MLVU`](https://huggingface.co/datasets/MLVU/MVLU), and [`LVBench`](https://huggingface.co/datasets/THUDM/LVBench).
 
+Take VideoMME as example, you can prepare by commands:
+```bash 
+huggingface-cli download --repo-type dataset --resume-download lmms-lab/Video-MME --local-dir lmms-lab/Video-MME --local-dir-use-symlinks False
+```
+Then you can unzip the videos and move them to flexselect/eval/data/videomme/data, and move test-00000-of-00001.parquet to flexselect/eval/data/videomme. 
 ## Pretrained Model
 
 The pretrained model can be found in their respective repositories: [`LLaVA-Video-7B`](https://huggingface.co/lmms-lab/LLaVA-Video-7B-Qwen2), [`LLaVA-Video-72B`](https://huggingface.co/lmms-lab/LLaVA-Video-72B-Qwen2), [`InternVL2.5-8B`](https://huggingface.co/OpenGVLab/InternVL2_5-8B), [`Qwen2.5VL-7B`](https://huggingface.co/Qwen/Qwen2.5-VL-7B-Instruct) and [`Qwen2.5VL-72B`](https://huggingface.co/Qwen/Qwen2.5-VL-72B-Instruct)..
 
 ## evaluation
 
-FlexSelect works in two modes: training-free mode and lightweight mode.  We evaluate them using LMMS-Eval. We follow the environment installation guideline of [`LMMS-EVAL`](https://github.com/EvolvingLMMs-Lab/lmms-eval/blob/main/README.md#installation).
+FlexSelect works in two modes: training-free mode and lightweight mode.  We evaluate them using LMMS-Eval. We follow the environment installation guideline of [`LMMS-EVAL`](https://github.com/EvolvingLMMs-Lab/lmms-eval/blob/main/README.md#installation). You can setup a environment by running:
 
-run command 
+```bash
+sh setup.sh
+```
+
+You should download the token selector weights from huggingface:
+
+```bash
+huggingface-cli download --resume-download yunzhuyunzhu/flexselect_llava_video --local-dir flexselect/eval/models/flexselect_llava_video
+huggingface-cli download --resume-download yunzhuyunzhu/flexselect_qwen2.5vl --local-dir flexselect/eval/models/flexselect_qwen2.5vl
+huggingface-cli download --resume-download yunzhuyunzhu/flexselect_internvl2.5 --local-dir flexselect/eval/models/flexselect_internvl2.5
+```
+
+Then you can reproduce our results:
 ```bash 
 sh eval/scripts/training_free/eval_llavavideo.sh 
 sh eval/scripts/training_free/eval_internvl2_5.sh 
 sh eval/scripts/training_free/eval_qwenvl2_5.sh
 ```
-to reproduce our result.
 
 Here are explanations of variants in our eval scripts:
 

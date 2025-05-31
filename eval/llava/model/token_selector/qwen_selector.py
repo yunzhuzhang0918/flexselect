@@ -280,7 +280,7 @@ class Qwen2ModelForSelector_FromSelf(Qwen2ModelForSelector):
         config: Qwen2Config
     """
     def __init__(self, config: Qwen2Config, bigger_model):
-        super().__init__(config)
+        super().__init__(config, drop_func_name=config.drop_func_name)
         self._attn_implementation = config._attn_implementation
         self.mm_projector = bigger_model.mm_projector
         self.embed_tokens = bigger_model.embed_tokens

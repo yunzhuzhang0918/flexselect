@@ -6,7 +6,7 @@ from qwen2 import Qwen2Config
 from .qwen_selector import Qwen2ModelForSelector, Qwen2ModelForSelector_FromSelf
 
 
-def build_token_selector(config, token_selector_path=None, bigger_model=None, delay_load=False, **kwargs):
+def build_token_selector(config, token_selector_path=None, bigger_model=None, delay_load=False, **kwargs): 
     if bigger_model is not None:
         return Qwen2ModelForSelector_FromSelf(config, bigger_model, **kwargs)
     else:

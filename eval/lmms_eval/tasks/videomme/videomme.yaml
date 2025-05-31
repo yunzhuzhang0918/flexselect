@@ -1,4 +1,4 @@
-dataset_path: Video-MME # your videomme path
+dataset_path: data/videomme
 dataset_kwargs:
   token: True
   cache_dir: videomme
