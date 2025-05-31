@@ -2,7 +2,7 @@
 The official repository for paper "FlexSelect: Flexible Token Selection for Efficient Long Video Understanding".
 
 
-[`Webpage`]() ｜ [`Paper`]()
+[`Webpage`]() ｜ [`Paper`]() | [`Huggingface`](https://huggingface.co/yunzhuyunzhu) 
 
 ## Introduction
 ![Framework](assets/arch.png)
