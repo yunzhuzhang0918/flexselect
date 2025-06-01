@@ -22,7 +22,6 @@ We present FlexSelect, a flexible and efficient token selection method that leve
 
 We conduct experiments on three video LLMs (LLaVA-video, Qwen2.5VL, InternVL2.5) under for benchmarks: LongVideoBench, VideoMME, LVbench, MLVU.
 
-# Comprehensive Evaluation on Long Video Benchmarks
 
 | Model | Size | VideoMME (Long) | VideoMME (Overall) | MLVU (M-Avg) | LongVB (Val) | LVBench (Test) |
 |-------|------|-----------------|--------------------|--------------|--------------|----------------|
