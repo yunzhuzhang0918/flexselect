@@ -2,41 +2,20 @@
 The official repository for paper "FlexSelect: Flexible Token Selection for Efficient Long Video Understanding".
 
 
-[`Webpage`]() ｜ [`Paper`]() | [`Huggingface`](https://huggingface.co/yunzhuyunzhu) 
+[`Webpage`](https://yunzhuzhang0918.github.io/flex_select) ｜ [`Paper`]() | [`Huggingface`](https://huggingface.co/yunzhuyunzhu) 
 
 ## Introduction
 ![Framework](assets/arch.png)
 
 We present FlexSelect, a flexible and efficient token selection method that leverages cross-modal attention scores in VideoLLMs to identify query-relevant visual tokens. Our approach combines: (1) training-free attention-based token ranking, and (2) a lightweight selector for fast filtering.
 
-## Visualization Result
-We identify the reference layer in VideoLLM where cross-modal attention scores best reflect the text-visual semantical relevance.
-
-### Recall@K result
-
-```bash
-python3 flexselect/visualization/LLaVA-NeXT/needle_llava.py
-python3 flexselect/visualization/QwenVL/needle_qwen2_5vl.py
-python3 flexselect/visualization/InternVL2/needle_internvl2_5.py
-```
-
-### Attention Scores Heatmap
-
-```bash 
-python3 flexselect/visualization/LLaVA-NeXT/draw_heatmap_llava.py 
-python3 flexselect/visualization/InternVL2/draw_heatmap_internvl.py
-```
-### PCA Visualization
-
-```bash
-python3 /mnt/sh/mmvision/home/yunzhuzhang/flexselect/visualization/LLaVA-NeXT/pca_llava.py
-```
-
 ## Todo:
 - [x] Evaluation Code release of FlexSelect with LLaVA-Vide, Qwen2.5VL, InternVL2.5.
 - [x] Training Code release of FlexSelect with LLaVA-Vide, Qwen2.5VL, InternVL2.5.
 - [ ] Visualization code release of FlexSelect with LLaVA-Vide, Qwen2.5VL, InternVL2.5.
 - [ ] Release the trained token selector.
+
+
 
 
 ## Performance
@@ -78,7 +57,7 @@ We conduct experiments on three video LLMs (LLaVA-video, Qwen2.5VL, InternVL2.5)
 
 
 
-## Data Preparation
+## Benchmark Data Preparation
 
 All four used benchmarks can be downloaded from huggingface website: [`LongVideoBench`](https://huggingface.co/datasets/longvideobench/LongVideoBench), [`VideoMME`](https://huggingface.co/datasets/lmms-lab/Video-MME), [`MLVU`](https://huggingface.co/datasets/MLVU/MVLU), and [`LVBench`](https://huggingface.co/datasets/THUDM/LVBench).
 
@@ -86,12 +65,13 @@ Take VideoMME as example, you can prepare by commands:
 ```bash 
 huggingface-cli download --repo-type dataset --resume-download lmms-lab/Video-MME --local-dir lmms-lab/Video-MME --local-dir-use-symlinks False
 ```
-Then you can unzip the videos and move them to flexselect/eval/data/videomme/data, and move test-00000-of-00001.parquet to flexselect/eval/data/videomme. 
+Then you can unzip the videos and move them to flexselect/eval/data/videomme/data. The test-00000-of-00001.parquet are expected to move to flexselect/eval/data/videomme. 
+
 ## Pretrained Model
 
-The pretrained model can be found in their respective repositories: [`LLaVA-Video-7B`](https://huggingface.co/lmms-lab/LLaVA-Video-7B-Qwen2), [`LLaVA-Video-72B`](https://huggingface.co/lmms-lab/LLaVA-Video-72B-Qwen2), [`InternVL2.5-8B`](https://huggingface.co/OpenGVLab/InternVL2_5-8B), [`Qwen2.5VL-7B`](https://huggingface.co/Qwen/Qwen2.5-VL-7B-Instruct) and [`Qwen2.5VL-72B`](https://huggingface.co/Qwen/Qwen2.5-VL-72B-Instruct)..
+The pretrained model can be found in their respective repositories: [`LLaVA-Video-7B`](https://huggingface.co/lmms-lab/LLaVA-Video-7B-Qwen2), [`LLaVA-Video-72B`](https://huggingface.co/lmms-lab/LLaVA-Video-72B-Qwen2), [`InternVL2.5-8B`](https://huggingface.co/OpenGVLab/InternVL2_5-8B), [`Qwen2.5VL-7B`](https://huggingface.co/Qwen/Qwen2.5-VL-7B-Instruct) and [`Qwen2.5VL-72B`](https://huggingface.co/Qwen/Qwen2.5-VL-72B-Instruct).
 
-## evaluation
+## Evaluation
 
 FlexSelect works in two modes: training-free mode and lightweight mode.  We evaluate them using LMMS-Eval. We follow the environment installation guideline of [`LMMS-EVAL`](https://github.com/EvolvingLMMs-Lab/lmms-eval/blob/main/README.md#installation). You can setup a environment by running:
 
@@ -157,21 +137,45 @@ We follow the environment installation guideline of corresponding project to con
 - Qwen2.5VL: https://github.com/QwenLM/Qwen2.5-VL/blob/main/qwen-vl-finetune/README.md
 - InternVL2.5: https://internvl.readthedocs.io/en/latest/internvl2.5/finetune.html
 
+You should first download the dataset [`LLaVA-Video-178K`](https://huggingface.co/datasets/lmms-lab/LLaVA-Video-178K).
+We randomly select 5% data from it for training.
+You can download the our sampled QA pairs from  [`token_selector_train_data`](https://huggingface.co/datasets/yunzhuyunzhu/token_selector_train_data) and put the data under the right directory.
 ```bash
-# Step 1: Train LLaVA-Video selector
-cd train/LLaVA-Video && sh scripts/train_selector.sh
+# Train LLaVA-Video selector
+mv output_rnd05.yaml flexselect/train/LLaVA-Video
+cd flexselect/train/LLaVA-Video && sh scripts/train_selector.sh
 
-# Step 2: Finetune Qwen2.5-VL
-cd train/Qwen2.5-VL/qwen-vl-finetune && sh scripts/sft_7b.sh
+# Train Qwen2.5-VL selector
+mv llava_video_178k.json flexselect/train/Qwen2.5-VL/
+cd flexselect/train/Qwen2.5-VL/qwen-vl-finetune && sh scripts/sft_7b.sh
 
-# Step 3: Finetune InternVL (dynamic resolution)
-cd train/InternVL/internvl_chat && sh shell/internvl2.5/2nd_finetune/internvl2_5_8b_dynamic_res_2nd_finetune_full.sh
+# Train InternVL selector 
+mv llava_video_178k.jsonl flexselect/train/InternVL/internvl_chat
+cd flexselect/train/InternVL/internvl_chat && sh shell/internvl2.5/2nd_finetune/internvl2_5_8b_dynamic_res_2nd_finetune_full.sh
 ```
 
-The training data can be found at:...
-We will release our trained token selector model.
+## Visualization Result
+We identify the reference layer in VideoLLM where cross-modal attention scores best reflect the text-visual semantical relevance. If you are interested in the visualization results in the paper, you can run the following command to reproduce them after setup conda virtual environment.
 
+#### Recall@K result
 
+```bash
+python3 flexselect/visualization/LLaVA-NeXT/needle_llava.py
+python3 flexselect/visualization/QwenVL/needle_qwen2_5vl.py
+python3 flexselect/visualization/InternVL2/needle_internvl2_5.py
+```
+
+#### Attention Scores Heatmap
+
+```bash 
+python3 flexselect/visualization/LLaVA-NeXT/draw_heatmap_llava.py 
+python3 flexselect/visualization/InternVL2/draw_heatmap_internvl.py
+```
+#### PCA Visualization
+
+```bash
+python3 /mnt/sh/mmvision/home/yunzhuzhang/flexselect/visualization/LLaVA-NeXT/pca_llava.py
+```
 
 ## Acknowledgement
 
