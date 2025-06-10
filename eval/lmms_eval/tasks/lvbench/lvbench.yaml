@@ -1,7 +1,7 @@
 dataset_path: data/lvbench
 dataset_kwargs:
   token: True
-  cache_dir: LVBench
+  cache_dir: lvbench
   video: True
     #create_link: True
   # From_YouTube: True

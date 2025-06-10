@@ -53,11 +53,67 @@ We conduct experiments on three video LLMs (LLaVA-video, Qwen2.5VL, InternVL2.5)
 
 All four used benchmarks can be downloaded from huggingface website: [`LongVideoBench`](https://huggingface.co/datasets/longvideobench/LongVideoBench), [`VideoMME`](https://huggingface.co/datasets/lmms-lab/Video-MME), [`MLVU`](https://huggingface.co/datasets/MLVU/MVLU), and [`LVBench`](https://huggingface.co/datasets/THUDM/LVBench).
 
-Take VideoMME as example, you can prepare by commands:
+#### Prepare Data For VideoMME
+
+1. Download the videos.
 ```bash 
 huggingface-cli download --repo-type dataset --resume-download lmms-lab/Video-MME --local-dir lmms-lab/Video-MME --local-dir-use-symlinks False
 ```
-Then you can unzip the videos and move them to flexselect/eval/data/videomme/data. The test-00000-of-00001.parquet are expected to move to flexselect/eval/data/videomme. 
+2. Unzip the videos
+```bash 
+cd lmms-lab/Video-MME
+unzip 'videos_chunked_*.zip' -d videos/
+```
+3. Move the data to eval directory 
+```bash 
+ln -s lmms-lab/Video-MME/videos flexselect/eval/data/videomme/data
+ln -s lmms-lab/Video-MME/videomme/test-00000-of-00001.parquet flexselect/eval/data/videomme/test-00000-of-00001.parquet 
+```
+
+#### Prepare Data For MLVU
+
+1. Download the videos.
+```bash 
+huggingface-cli download --repo-type dataset --resume-download sy1998/MLVU_dev --local-dir sy1998/MLVU_dev --local-dir-use-symlinks False
+
+```
+2. Unzip the videos
+```bash 
+cd sy1998/MLVU_dev
+unzip 'video_part_*.zip' -d videos/
+```
+3. Move the data to eval directory 
+```bash 
+ln -s sy1998/MLVU_dev/videos flexselect/eval/data/mlvu_test/data
+ln -s sy1998/MLVU_dev/mlvu/test-00000-of-00001.parquet flexselect/eval/data/mlvu_test/test-00000-of-00001.parquet 
+```
+
+#### Prepare Data For LVbench
+
+1. Download the videos and files.
+Follow instructions here for downloading videos: [`LVBench`](https://github.com/THUDM/LVBench/blob/main/scripts/download.sh)
+The flexselect/eval/data/lvbench/test.jsonl is the test file that we have compiled and conforms to the lmms-eval supported format.
+
+2. Move or Link the videos dir under flexselect/eval/data/lvbench
+
+#### Prepare Data For LongVideoBench
+1. Download the videos. 
+```bash
+huggingface-cli download --repo-type dataset --resume-download longvideobench/LongVideoBench --local-dir longvideobench/LongVideoBench --local-dir-use-symlinks False
+```
+
+2. Untar the videos
+```bash 
+cd longvideobench/LongVideoBench 
+cat videos.tar.part.* > videos.tar
+tar -xvf videos_merged.tar -C videos
+```
+
+3. Move the data to eval directory 
+```bash 
+ln -s longvideobench/LongVideoBench/videos flexselect/eval/data/longvideobench/data
+ln -s longvideobench/LongVideoBench/test-00000-of-00001.parquet  flexselect/eval/data/longvideobench/test-00000-of-00001.parquet
+``` 
 
 ## Pretrained Model
 
@@ -71,7 +127,7 @@ FlexSelect works in two modes: training-free mode and lightweight mode.  We eval
 sh setup.sh
 ```
 
-You should download the token selector weights from huggingface:
+You should download the token selector weights into flexselect/eval/models from huggingface:
 
 ```bash
 huggingface-cli download --resume-download yunzhuyunzhu/flexselect_llava_video --local-dir flexselect/eval/models/flexselect_llava_video
@@ -81,6 +137,7 @@ huggingface-cli download --resume-download yunzhuyunzhu/flexselect_internvl2.5 -
 
 Then you can reproduce our results:
 ```bash 
+cd flexselect/eval
 sh eval/scripts/training_free/eval_llavavideo.sh 
 sh eval/scripts/training_free/eval_internvl2_5.sh 
 sh eval/scripts/training_free/eval_qwenvl2_5.sh
@@ -114,7 +171,7 @@ Specify the evaluation model with the following options:
 | `mlvu_dev`             | MLVU               | Multi-language video understanding |
 | `lvbench`              | LVBench            | Short-video benchmark              |
 | `longvideobench_val_v` | LongVideoBench     | Default variant (e.g., for LLaVA)  |
-| `longvideobench_val_i` | LongVideoBench     | **InternVL series only** (uses caption) |
+| `longvideobench_val_v_sub` | LongVideoBench     | **InternVL series only** (uses caption) |
 
 
 
@@ -178,4 +235,13 @@ This repository is built upon [`LMMS-EVAL`](https://github.com/EvolvingLMMs-Lab/
 FlexSelect is released under the [`CC BY-NC-SA 4.0 license`](https://creativecommons.org/licenses/by-nc-sa/4.0/).
 
 ## Citation
+@misc{zhang2025flexselectflexibletokenselection,
+      title={FlexSelect: Flexible Token Selection for Efficient Long Video Understanding}, 
+      author={Yunzhu Zhang and Yu Lu and Tianyi Wang and Fengyun Rao and Yi Yang and Linchao Zhu},
+      year={2025},
+      eprint={2506.00993},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2506.00993}, 
+}
 
