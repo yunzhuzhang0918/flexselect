@@ -319,7 +319,7 @@ def main():
     total_sample = 0
     acc_sample = 0
     for needle in needles:
-        for doc in tqdm(list(samples)[:10]):
+        for doc in tqdm(list(samples)[:128]):
             total_sample += 1
             video_path = doc["videoID"] + ".mp4"
             

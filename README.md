@@ -2,7 +2,7 @@
 The official repository for paper "FlexSelect: Flexible Token Selection for Efficient Long Video Understanding".
 
 
-[`Webpage`](https://yunzhuzhang0918.github.io/flex_select) ｜ [`Paper`]() | [`Huggingface`](https://huggingface.co/yunzhuyunzhu) 
+[`Webpage`](https://yunzhuzhang0918.github.io/flex_select) ｜ [`Paper`](https://arxiv.org/abs/2506.00993) | [`Huggingface`](https://huggingface.co/yunzhuyunzhu) 
 
 ## Introduction
 ![Framework](assets/arch.png)
@@ -96,6 +96,8 @@ The flexselect/eval/data/lvbench/test.jsonl is the test file that we have compil
 
 2. Move or Link the videos dir under flexselect/eval/data/lvbench
 
+3. We reorangnize the test files to support lmms eval evaluation. You can download it from [`here`](https://huggingface.co/datasets/yunzhuyunzhu/token_selector_train_data/blob/main/lvbench.zip) and move or link it under `data/lvbench/` dir.
+
 #### Prepare Data For LongVideoBench
 1. Download the videos. 
 ```bash
@@ -138,9 +140,9 @@ huggingface-cli download --resume-download yunzhuyunzhu/flexselect_internvl2.5 -
 Then you can reproduce our results:
 ```bash 
 cd flexselect/eval
-sh eval/scripts/training_free/eval_llavavideo.sh 
-sh eval/scripts/training_free/eval_internvl2_5.sh 
-sh eval/scripts/training_free/eval_qwenvl2_5.sh
+sh scripts/eval_llavavideo.sh
+sh scripts/eval_internvl2_5.sh
+sh scripts/eval_qwenvl2_5.sh
 ```
 
 Here are explanations of variants in our eval scripts:
@@ -207,11 +209,13 @@ cd flexselect/train/InternVL/internvl_chat && sh shell/internvl2.5/2nd_finetune/
 We identify the reference layer in VideoLLM where cross-modal attention scores best reflect the text-visual semantical relevance. If you are interested in the visualization results in the paper, you can run the following command to reproduce them after setup conda virtual environment.
 
 #### Recall@K result
+Download needle data from [`needle data`](https://huggingface.co/datasets/yunzhuyunzhu/token_selector_train_data/blob/main/needles.zip) and unzip it.
+
 
 ```bash
-python3 flexselect/visualization/LLaVA-NeXT/needle_llava.py
-python3 flexselect/visualization/QwenVL/needle_qwen2_5vl.py
-python3 flexselect/visualization/InternVL2/needle_internvl2_5.py
+python3 flexselect/visualization/LLaVA-NeXT/needle_llava.py --needle_data {path to needle data path} --data_root {path to videomme video dir} --data {path to videomme test.parquet}
+python3 flexselect/visualization/QwenVL/needle_qwen2_5vl.py --needle_data {path to needle data path} --data_root {path to videomme video dir} --data {path to videomme test.parquet} 
+python3 flexselect/visualization/InternVL2/needle_internvl2_5.py --needle_data {path to needle data path} --data_root {path to videomme video dir} --data {path to videomme test.parquet}
 ```
 
 #### Attention Scores Heatmap

@@ -494,7 +494,7 @@ def main():
     ratios = []
 
     for needle in needles:
-        for doc in tqdm(list(samples)[:10]):
+        for doc in tqdm(list(samples)[:128]):
             message = [{"role": "system", "content": "You are a helpful assistant."}]
             video_path = doc["videoID"] + ".mp4"
             video_path = os.path.join(args.data_root, video_path)
