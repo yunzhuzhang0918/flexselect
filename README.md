@@ -1,4 +1,7 @@
-# FlexSelect
+# FlexSelect: Flexible Token Selection for Efficient Long Video Understanding (NeurIPS 2025)
+
+Created by Yunzhu Zhang*, Yu Lu*, Tianyi Wang, Fengyun Rao, Yi Yang, Linchao Zhu
+
 The official repository for paper "FlexSelect: Flexible Token Selection for Efficient Long Video Understanding".
 [`Webpage`](https://yunzhuzhang0918.github.io/flex_select) ｜ [`Paper`](https://arxiv.org/abs/2506.00993) | [`Huggingface`](https://huggingface.co/yunzhuyunzhu) 
 ## News
