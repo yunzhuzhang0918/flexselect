@@ -1,8 +1,14 @@
 # FlexSelect
 The official repository for paper "FlexSelect: Flexible Token Selection for Efficient Long Video Understanding".
-
-
 [`Webpage`](https://yunzhuzhang0918.github.io/flex_select) ｜ [`Paper`](https://arxiv.org/abs/2506.00993) | [`Huggingface`](https://huggingface.co/yunzhuyunzhu) 
+## News
+[2025-09-18]: 🎉 Our paper FlexSelect has been accepted by NeurIPS 2025!
+
+[2025-6-01]: Source Code uploaded. 
+
+[2025-5-20]: Code repository created. 
+
+
 
 ## Introduction
 ![Framework](assets/arch.png)
