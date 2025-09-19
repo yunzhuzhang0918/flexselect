@@ -233,7 +233,7 @@ python3 flexselect/visualization/InternVL2/draw_heatmap_internvl.py
 #### PCA Visualization
 
 ```bash
-python3 /mnt/sh/mmvision/home/yunzhuzhang/flexselect/visualization/LLaVA-NeXT/pca_llava.py
+python3 flexselect/visualization/LLaVA-NeXT/pca_llava.py
 ```
 
 ## Acknowledgement
