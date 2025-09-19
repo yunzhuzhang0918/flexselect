@@ -245,6 +245,7 @@ This repository is built upon [`LMMS-EVAL`](https://github.com/EvolvingLMMs-Lab/
 FlexSelect is released under the [`CC BY-NC-SA 4.0 license`](https://creativecommons.org/licenses/by-nc-sa/4.0/).
 
 ## Citation
+```bibtex
 @misc{zhang2025flexselectflexibletokenselection,
       title={FlexSelect: Flexible Token Selection for Efficient Long Video Understanding}, 
       author={Yunzhu Zhang and Yu Lu and Tianyi Wang and Fengyun Rao and Yi Yang and Linchao Zhu},
@@ -254,4 +255,5 @@ FlexSelect is released under the [`CC BY-NC-SA 4.0 license`](https://creativecom
       primaryClass={cs.CV},
       url={https://arxiv.org/abs/2506.00993}, 
 }
+```
 
