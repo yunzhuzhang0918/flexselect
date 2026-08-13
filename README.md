@@ -1,3 +1,5 @@
+
+
 # FlexSelect: Flexible Token Selection for Efficient Long Video Understanding (NeurIPS 2025)
 
 Created by Yunzhu Zhang*, Yu Lu*, Tianyi Wang, Fengyun Rao, Yi Yang, Linchao Zhu
@@ -22,7 +24,7 @@ We present FlexSelect, a flexible and efficient token selection method that leve
 
 ## Performance
 
-We conduct experiments on three video LLMs (LLaVA-video, Qwen2.5VL, InternVL2.5) under for benchmarks: LongVideoBench, VideoMME, LVbench, MLVU.
+We conduct experiments on three video LLMs (LLaVA-video, Qwen2.5VL, InternVL2.5) on four benchmarks: LongVideoBench, VideoMME, LVBench, and MLVU.
 
 
 | Model | Size | VideoMME (Long) | VideoMME (Overall) | MLVU (M-Avg) | LongVB (Val) | LVBench (Test) |
@@ -105,7 +107,7 @@ The flexselect/eval/data/lvbench/test.jsonl is the test file that we have compil
 
 2. Move or Link the videos dir under flexselect/eval/data/lvbench
 
-3. We reorangnize the test files to support lmms eval evaluation. You can download it from [`here`](https://huggingface.co/datasets/yunzhuyunzhu/token_selector_train_data/blob/main/lvbench.zip) and move or link it under `data/lvbench/` dir.
+3. We reorganize the test files to support lmms eval evaluation. You can download it from [`here`](https://huggingface.co/datasets/yunzhuyunzhu/token_selector_train_data/blob/main/lvbench.zip) and move or link it under `data/lvbench/` dir.
 
 #### Prepare Data For LongVideoBench
 1. Download the videos. 
@@ -199,7 +201,7 @@ We follow the environment installation guideline of corresponding project to con
 
 You should first download the dataset [`LLaVA-Video-178K`](https://huggingface.co/datasets/lmms-lab/LLaVA-Video-178K).
 We randomly select 5% data from it for training.
-You can download the our sampled QA pairs from  [`token_selector_train_data`](https://huggingface.co/datasets/yunzhuyunzhu/token_selector_train_data) and put the data under the right directory.
+You can download our sampled QA pairs from  [`token_selector_train_data`](https://huggingface.co/datasets/yunzhuyunzhu/token_selector_train_data) and put the data under the right directory.
 ```bash
 # Train LLaVA-Video selector
 mv output_rnd05.yaml flexselect/train/LLaVA-Video
@@ -259,4 +261,3 @@ FlexSelect is released under the [`CC BY-NC-SA 4.0 license`](https://creativecom
       url={https://arxiv.org/abs/2506.00993}, 
 }
 ```
-
